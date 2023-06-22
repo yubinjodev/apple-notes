@@ -1,7 +1,13 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-export default function SignUpForm() {
+export type SignUpFormProps = {
+  openSignInForm:()=>void;
+}
+
+export default function SignUpForm(props: SignUpFormProps) {
+  const {openSignInForm} = props;
+
   return (
     <Form className="signupform container">
       <Form.Group>
@@ -13,7 +19,7 @@ export default function SignUpForm() {
         </Button>
 
         <div>
-          Already have an account? <span>Sign In</span>
+          Already have an account? <span onClick={openSignInForm}>Sign In</span>
         </div>
       </Form.Group>
     </Form>

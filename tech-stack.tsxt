@@ -1,0 +1,23 @@
+language : typescript
+
+framework : react
+
+build tools : npm
+
+css framework : bootstrap (?)
+
+backend : mongodb
+
+state management : redux
+
+form helper: formik
+
+routing : react-router
+
+api client : rest api => axios
+
+utility library : lodash
+
+unit testing : jest
+
+e2e testing : selenium
