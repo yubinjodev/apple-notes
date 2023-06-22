@@ -1,8 +1,9 @@
-import { Button, Form } from "react-bootstrap"
+import Button from "react-bootstrap/Button"
+import Form from "react-bootstrap/Form"
 
 export default function LoginForm() {
   return (
-    <Form className="loginform container">
+    <Form className="loginform">
       <Form.Group >
         <Form.Control type="email" placeholder="Email"/>
         <Form.Control type="password" placeholder="Password"/>
