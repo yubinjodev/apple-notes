@@ -1,7 +1,11 @@
-function App() {
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import LoginForm from "./components/LoginForm";
+
+export default function App() {
   return (
-    <>hello</>
+    <main className="main container">
+      <LoginForm/>
+    </main>
   );
 }
-
-export default App;
