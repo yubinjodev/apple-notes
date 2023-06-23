@@ -1,11 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
 
+import {useDispatch} from "react-redux"
+import { login } from "../actions";
+
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 export type SignUpFormProps = {
   openSignInForm:()=>void;
+  openEditor:()=>void;
 }
 
 export type User = {
@@ -23,7 +27,9 @@ const config = {
 }
 
 export default function SignUpForm(props: SignUpFormProps) {
-  const {openSignInForm} = props;
+  const dispatch = useDispatch()
+
+  const {openSignInForm, openEditor} = props;
 
   const [email, setEmail] = useState<string>()
   const [pw, setPw] = useState<string>()
@@ -45,6 +51,8 @@ export default function SignUpForm(props: SignUpFormProps) {
     }
 
     alert("Sign Up Successful")
+    dispatch(login())
+    openEditor();
   }
 
   const handleClickSignUp = ()=>{
