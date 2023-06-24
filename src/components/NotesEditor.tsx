@@ -12,7 +12,7 @@ export default function NotesEditor() {
   const [screenId, setScreenId] = useState<ScreenId>("LoginForm");
   const [signUpFormProps, setSignUpFormProps] = useState<SignUpFormProps>();
 
-  const userState = useSelector((state: any) => state.userState);
+  const userState = useSelector((state: any) => state.userReducer);
 
   const openSignInForm = ()=>{
     setScreenId("LoginForm")
@@ -32,8 +32,7 @@ export default function NotesEditor() {
 
   return (
     <main className="noteseditor container">
-      {userState ? "logged in" : "not logged in"}
-
+      {userState ? "online" : "offline"} 
       {screenId === "LoginForm" &&<LoginForm openSignUpForm={openSignUpForm}/>}
       {screenId === "SignUpForm" && signUpFormProps && <SignUpForm {...signUpFormProps}/>}
       {screenId === "Editor" && <Editor />}

@@ -15,6 +15,7 @@ export type SignUpFormProps = {
 export type User = {
   email: string;
   pw: string;
+  online: boolean;
 } | null;
 
 const URL = "https://api.jsonbin.io/v3/b";
@@ -24,8 +25,10 @@ const CONFIG = {
     "Content-Type": "application/json",
     // "X-Master-Key": (process.env.REACT_APP_X_MASTER_KEY as string),
     // "X-Access-Key": (process.env.REACT_APP_X_ACCESS_KEY as string),
-    "X-Master-Key": "$2b$10$r6LNY8lMtQvXzRP/ZfPasuJg9AW.ThYLsXWivowsi5kpi2NF4T2Ka",
-    "X-Access-Key": "$2b$10$.N5NTNbEHsXaUAILlE99Q./3FLOOq2izzW1IFpsKLb0LaX8BtD3oO",
+    "X-Master-Key":
+      "$2b$10$r6LNY8lMtQvXzRP/ZfPasuJg9AW.ThYLsXWivowsi5kpi2NF4T2Ka",
+    "X-Access-Key":
+      "$2b$10$.N5NTNbEHsXaUAILlE99Q./3FLOOq2izzW1IFpsKLb0LaX8BtD3oO",
   },
 };
 
@@ -63,7 +66,7 @@ export default function SignUpForm(props: SignUpFormProps) {
 
   const handleClickSignUp = () => {
     if (email && pw) {
-      setSignupInfo({ email, pw });
+      setSignupInfo({ email, pw, online: true });
       signUp();
     }
   };
@@ -75,11 +78,13 @@ export default function SignUpForm(props: SignUpFormProps) {
           type="email"
           placeholder="Email"
           onChange={handleChangeEmail}
+          value={email}
         />
         <Form.Control
           type="password"
           placeholder="Password"
           onChange={handleChangePw}
+          value={pw}
         />
 
         <Button variant="primary" type="submit" onClick={handleClickSignUp}>
