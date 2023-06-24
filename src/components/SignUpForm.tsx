@@ -78,13 +78,11 @@ export default function SignUpForm(props: SignUpFormProps) {
           type="email"
           placeholder="Email"
           onChange={handleChangeEmail}
-          value={email}
         />
         <Form.Control
           type="password"
           placeholder="Password"
           onChange={handleChangePw}
-          value={pw}
         />
 
         <Button variant="primary" type="submit" onClick={handleClickSignUp}>
