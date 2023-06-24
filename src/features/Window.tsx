@@ -1,22 +1,35 @@
+import { useDispatch, useSelector } from "react-redux";
 import NotesEditor from "../components/NotesEditor";
 import Searchbar from "../components/Searchbar";
 import Sidebar from "../components/Sidebar";
 import WindowControl from "../components/WindowControl";
 
 import Stack from "react-bootstrap/Stack";
+import { logout } from "../actions";
 
-export default function Window(){
-    return(
-        <Stack direction="vertical">
-        <Stack direction="horizontal" className="bg-primary justify-content-between p-1">
-          <WindowControl />
-          <Searchbar />
-        </Stack>
+export default function Window() {
+  const dispatch = useDispatch();
+  const userState = useSelector((state: any) => state.userReducer);
 
-        <Stack direction="horizontal">
-          <Sidebar/>
-          <NotesEditor/>
-        </Stack>
+  const handleClickLogOut = () => {
+    dispatch(logout());
+  };
+
+  return (
+    <Stack direction="vertical">
+      <Stack
+        direction="horizontal"
+        className="bg-primary justify-content-between p-1"
+      >
+        <WindowControl />
+        <Searchbar />
+        {userState && <button onClick={handleClickLogOut}>log out</button>}
       </Stack>
-    )
+
+      <Stack direction="horizontal">
+        <Sidebar />
+        <NotesEditor />
+      </Stack>
+    </Stack>
+  );
 }
