@@ -1,3 +1,9 @@
+import { Form } from "react-bootstrap";
+
 export default function Editor() {
-  return <>Editor open</>;
+  return (
+    <Form>
+      <Form.Control as="textarea" rows={10} />
+    </Form>
+  );
 }

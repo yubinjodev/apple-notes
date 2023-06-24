@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 import { useState } from "react";
 
 import Button from "react-bootstrap/Button";
@@ -13,8 +13,8 @@ export type LoginFormProps = {
 
 type Users = User[];
 
-const BIN_ID = "6496c4129d312622a374cf7b";
-const CONFIG = {
+export const BIN_ID = "6496c4129d312622a374cf7b";
+export const GET_CONFIG = {
   headers: {
     "X-Master-Key": X_MASTER_KEY,
     "X-Access-Key": X_ACCESS_KEY,
@@ -41,7 +41,7 @@ export default function LoginForm(props: LoginFormProps) {
   const handleClickSignIn = async (e: any) => {
     e.preventDefault()
     try{
-      const response = await axios.get(baseURL + BIN_ID, CONFIG);
+      const response = await axios.get(baseURL + BIN_ID, GET_CONFIG);
       setUsers(response.data.record.users)
       users?.forEach(user => {
         if(user?.email === email && user?.pw === pw){
@@ -51,7 +51,7 @@ export default function LoginForm(props: LoginFormProps) {
         }
       });
     }catch(e){
-      console.log(e);
+      console.error(e);
     }
   };
 

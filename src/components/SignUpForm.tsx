@@ -16,6 +16,7 @@ export type User = {
   email: string;
   pw: string;
   online: boolean;
+  
 } | null;
 
 export const baseURL = "https://api.jsonbin.io/v3/b/";
