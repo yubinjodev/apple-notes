@@ -1,19 +1,34 @@
+import axios, { AxiosRequestConfig } from "axios";
 import { useState } from "react";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-
+import { User, X_ACCESS_KEY, X_MASTER_KEY, baseURL } from "./SignUpForm";
+import { useDispatch } from "react-redux";
+import { login } from "../actions";
 
 export type LoginFormProps = {
   openSignUpForm: () => void;
 };
 
+type Users = User[];
+
+const BIN_ID = "6496c4129d312622a374cf7b";
+const CONFIG = {
+  headers: {
+    "X-Master-Key": X_MASTER_KEY,
+    "X-Access-Key": X_ACCESS_KEY,
+  },
+};
+
 export default function LoginForm(props: LoginFormProps) {
+  const dispatch = useDispatch()
+
   const { openSignUpForm } = props;
 
   const [email, setEmail] = useState<string>();
   const [pw, setPw] = useState<string>();
-  const loginInfo = { email, pw };
+  const [users, setUsers] = useState<Users>();
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -23,7 +38,21 @@ export default function LoginForm(props: LoginFormProps) {
     setPw(e.target.value);
   };
 
-  const handleClickSignIn = async () => {
+  const handleClickSignIn = async (e: any) => {
+    e.preventDefault()
+    try{
+      const response = await axios.get(baseURL + BIN_ID, CONFIG);
+      setUsers(response.data.record.users)
+      users?.forEach(user => {
+        if(user?.email === email && user?.pw === pw){
+          if(email && pw){
+            dispatch(login({email, pw, online: true}))
+          }
+        }
+      });
+    }catch(e){
+      console.log(e);
+    }
   };
 
   return (

@@ -18,17 +18,14 @@ export type User = {
   online: boolean;
 } | null;
 
-const URL = "https://api.jsonbin.io/v3/b";
-// const URL: string = (process.env.REACT_APP_URL as string);
+export const baseURL = "https://api.jsonbin.io/v3/b/";
+export const X_MASTER_KEY = "$2b$10$r6LNY8lMtQvXzRP/ZfPasuJg9AW.ThYLsXWivowsi5kpi2NF4T2Ka";
+export const X_ACCESS_KEY = "$2b$10$.N5NTNbEHsXaUAILlE99Q./3FLOOq2izzW1IFpsKLb0LaX8BtD3oO"
 const CONFIG = {
   headers: {
     "Content-Type": "application/json",
-    // "X-Master-Key": (process.env.REACT_APP_X_MASTER_KEY as string),
-    // "X-Access-Key": (process.env.REACT_APP_X_ACCESS_KEY as string),
-    "X-Master-Key":
-      "$2b$10$r6LNY8lMtQvXzRP/ZfPasuJg9AW.ThYLsXWivowsi5kpi2NF4T2Ka",
-    "X-Access-Key":
-      "$2b$10$.N5NTNbEHsXaUAILlE99Q./3FLOOq2izzW1IFpsKLb0LaX8BtD3oO",
+    "X-Master-Key":X_MASTER_KEY,
+    "X-Access-Key":X_ACCESS_KEY,
   },
 };
 
@@ -51,7 +48,7 @@ export default function SignUpForm(props: SignUpFormProps) {
 
   const signUp = async () => {
     try {
-      await axios.post(URL, signUpInfo, CONFIG);
+      await axios.post(baseURL, signUpInfo, CONFIG);
 
       alert("Sign Up Successful");
 

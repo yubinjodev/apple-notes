@@ -32,10 +32,10 @@ export default function NotesEditor() {
 
   return (
     <main className="noteseditor container">
-      {userState ? "online" : "offline"} 
-      {screenId === "LoginForm" &&<LoginForm openSignUpForm={openSignUpForm}/>}
+      {userState ? <Editor/> : <LoginForm openSignUpForm={openSignUpForm}/>} 
+      {/* {screenId === "LoginForm" &&<LoginForm openSignUpForm={openSignUpForm}/>}
       {screenId === "SignUpForm" && signUpFormProps && <SignUpForm {...signUpFormProps}/>}
-      {screenId === "Editor" && <Editor />}
+      {screenId === "Editor" && <Editor />} */}
     </main>
   );
 }
