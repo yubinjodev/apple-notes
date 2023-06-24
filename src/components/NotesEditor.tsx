@@ -1,6 +1,8 @@
 import { useState } from "react";
+
 import LoginForm from "./LoginForm";
 import SignUpForm, { SignUpFormProps } from "./SignUpForm";
+import Editor from "./Editor";
 
 import {useSelector} from "react-redux"
 
@@ -34,6 +36,7 @@ export default function NotesEditor() {
 
       {screenId === "LoginForm" &&<LoginForm openSignUpForm={openSignUpForm}/>}
       {screenId === "SignUpForm" && signUpFormProps && <SignUpForm {...signUpFormProps}/>}
+      {screenId === "Editor" && <Editor />}
     </main>
   );
 }

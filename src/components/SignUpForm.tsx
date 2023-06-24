@@ -13,16 +13,19 @@ export type SignUpFormProps = {
 };
 
 export type User = {
-  email: string | undefined;
-  pw: string | undefined;
-};
+  email: string;
+  pw: string;
+} | null;
 
 const URL = "https://api.jsonbin.io/v3/b";
-const config = {
+// const URL: string = (process.env.REACT_APP_URL as string);
+const CONFIG = {
   headers: {
-    "Content-Type": process.env.URL,
-    "X-Master-Key": process.env.X_MASTER_KEY,
-    "X-Access-Key":process.env.X_ACCESS_KEY,
+    "Content-Type": "application/json",
+    // "X-Master-Key": (process.env.REACT_APP_X_MASTER_KEY as string),
+    // "X-Access-Key": (process.env.REACT_APP_X_ACCESS_KEY as string),
+    "X-Master-Key": "$2b$10$r6LNY8lMtQvXzRP/ZfPasuJg9AW.ThYLsXWivowsi5kpi2NF4T2Ka",
+    "X-Access-Key": "$2b$10$.N5NTNbEHsXaUAILlE99Q./3FLOOq2izzW1IFpsKLb0LaX8BtD3oO",
   },
 };
 
@@ -45,19 +48,24 @@ export default function SignUpForm(props: SignUpFormProps) {
 
   const signUp = async () => {
     try {
-      await axios.post(URL, signUpInfo, config);
+      await axios.post(URL, signUpInfo, CONFIG);
+
+      alert("Sign Up Successful");
+
+      if (signUpInfo) {
+        dispatch(login(signUpInfo));
+        openEditor();
+      }
     } catch (e) {
       console.log(e);
     }
-
-    alert("Sign Up Successful");
-    dispatch(login());
-    openEditor();
   };
 
   const handleClickSignUp = () => {
-    setSignupInfo({ email, pw });
-    signUp();
+    if (email && pw) {
+      setSignupInfo({ email, pw });
+      signUp();
+    }
   };
 
   return (

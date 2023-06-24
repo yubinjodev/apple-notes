@@ -6,8 +6,9 @@ import App from "./App";
 import allReducers from "./reducers";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store = createStore(allReducers);
+const store = createStore(allReducers, composeWithDevTools());
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
