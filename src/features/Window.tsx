@@ -16,20 +16,22 @@ export default function Window() {
   };
 
   return (
-    <Stack direction="vertical">
-      <Stack
-        direction="horizontal"
-        className="bg-primary justify-content-between p-1"
-      >
-        <WindowControl />
-        <Searchbar />
-        {userState && <button onClick={handleClickLogOut}>log out</button>}
-      </Stack>
+    <main className="window-root container-lg bg-transparent rounded-3 shadow">
+      <Stack className="container" direction="vertical">
+        <Stack
+          direction="horizontal"
+          className="bg-primary justify-content-between p-1"
+        >
+          <WindowControl />
+          <Searchbar />
+          {userState && <button onClick={handleClickLogOut}>log out</button>}
+        </Stack>
 
-      <Stack direction="horizontal">
-        <Sidebar />
-        <NotesEditor />
+        <Stack direction="horizontal">
+          <Sidebar />
+          <NotesEditor />
+        </Stack>
       </Stack>
-    </Stack>
+    </main>
   );
 }
