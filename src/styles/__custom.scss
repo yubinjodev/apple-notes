@@ -1,5 +1,7 @@
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootstrap/scss/bootstrap";
 
 .bg-body{
-    background-image: url("/images/background.png");
+    background-image: url("../assets/images/background.png");
+    background-size: cover;
+    height:100vh;
 }
