@@ -4,7 +4,6 @@ import Searchbar from "../components/Searchbar";
 import Sidebar from "../components/Sidebar";
 import WindowControl from "../components/WindowControl";
 
-import Stack from "react-bootstrap/Stack";
 import { logout } from "../actions";
 
 export default function Window() {
@@ -16,22 +15,27 @@ export default function Window() {
   };
 
   return (
-    <main className="window-root container-lg bg-transparent rounded-3 shadow">
-      <Stack className="container" direction="vertical">
-        <Stack
-          direction="horizontal"
-          className="bg-primary justify-content-between p-1"
-        >
-          <WindowControl />
-          <Searchbar />
-          {userState && <button onClick={handleClickLogOut}>log out</button>}
-        </Stack>
+    <main className="window-root container-sm bg-transparent rounded-3 shadow">
+        <div className="row bg-transparent-darker p-2 rounded-top">
+          <div className="col-6  d-flex align-items-center">
+            <WindowControl />
+          </div>
+          <div className="col-6 ps-5">
+            <Searchbar />
+          </div>
+          {/* <div className="col">
+            {userState && <button onClick={handleClickLogOut}>log out</button>}
+          </div> */}
+        </div>
 
-        <Stack direction="horizontal">
-          <Sidebar />
-          <NotesEditor />
-        </Stack>
-      </Stack>
+        <div className="row">
+          <div className="col-2">
+            <Sidebar />
+          </div>
+          <div className="col-10 bg-transparent-dark rounded-end">
+            <NotesEditor />
+          </div>
+        </div>
     </main>
   );
 }
