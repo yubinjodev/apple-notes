@@ -20,7 +20,7 @@ export default function Sidebar(){
     },[])
 
     return(
-        <aside>
+        <aside className="sidebar-root">
             <SidebarPreview/>
             <SidebarPreview/>
             <SidebarPreview/>

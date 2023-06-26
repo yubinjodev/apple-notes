@@ -1,9 +1,15 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 
+
+:root{
+    --bs-body-color:#fff;
+}
+
 ::placeholder {
   color: $gray-700 !important;
   opacity: 1 !important;
 }
+
 
 $gray-500: rgba(0, 0, 0, 0.2);
 $gray-900: rgba(0, 0, 0, 0.5);

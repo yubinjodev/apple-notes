@@ -29,7 +29,7 @@ export default function Window() {
         </div>
 
         <div className="row">
-          <div className="col-2">
+          <div className="col-2 py-3">
             <Sidebar />
           </div>
           <div className="col-10 bg-transparent-dark rounded-end">

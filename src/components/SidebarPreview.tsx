@@ -1,14 +1,16 @@
-import Stack from "react-bootstrap/Stack";
+export default function SidebarPreview() {
+  return (
+    <section className="sidebarpreview-root container">
+      <div className="row fs-5">
+        <div className="col">Title</div>
+      </div>
 
-export default function SidebarPreview(){
-    return(
-        <section className="sidebarpreview container">
-            <Stack direction="vertical">
-                Title
-                <Stack direction="horizontal">
-                    Public - Date
-                </Stack>
-            </Stack>
-        </section>
-    )
+      <div className="row fs-6">
+        <div className="col">Public</div>
+        <div className="col">-</div>
+        <div className="col">Date</div>
+      </div>
+      <hr/>
+    </section>
+  );
 }
