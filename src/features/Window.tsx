@@ -16,26 +16,26 @@ export default function Window() {
 
   return (
     <main className="window-root container-sm bg-transparent rounded-3 shadow">
-        <div className="row bg-transparent-darker p-2 rounded-top">
-          <div className="col-6  d-flex align-items-center">
-            <WindowControl />
-          </div>
-          <div className="col-6 ps-5">
-            <Searchbar />
-          </div>
-          {/* <div className="col">
+      <div className="row bg-transparent-darker p-2 rounded-top">
+        <div className="col-6  d-flex align-items-center">
+          <WindowControl />
+        </div>
+        <div className="col-6 ps-5">
+          <Searchbar />
+        </div>
+        <div className="col">
             {userState && <button onClick={handleClickLogOut}>log out</button>}
-          </div> */}
-        </div>
+          </div>
+      </div>
 
-        <div className="row">
-          <div className="col-2 py-3">
-            <Sidebar />
-          </div>
-          <div className="col-10 bg-transparent-dark rounded-end">
-            <NotesEditor />
-          </div>
+      <div className="row">
+        <div className="col-2 py-3">
+          <Sidebar />
         </div>
+        <div className="col-10 bg-transparent-dark rounded-end d-flex justify-content-center align-items-center">
+          <NotesEditor />
+        </div>
+      </div>
     </main>
   );
 }

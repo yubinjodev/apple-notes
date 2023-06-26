@@ -1,8 +1,7 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 
-
-:root{
-    --bs-body-color:#fff;
+:root {
+  --bs-body-color: #fff;
 }
 
 ::placeholder {
@@ -10,8 +9,7 @@
   opacity: 1 !important;
 }
 
-
-$gray-500: rgba(0, 0, 0, 0.2);
+$gray-500: rgba(0, 0, 0, 0.3);
 $gray-900: rgba(0, 0, 0, 0.5);
 
 .bg-body {
@@ -21,7 +19,7 @@ $gray-900: rgba(0, 0, 0, 0.5);
 }
 
 .bg-transparent {
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(20px);
   background-color: $gray-500 !important;
 }
 
@@ -35,7 +33,7 @@ $gray-900: rgba(0, 0, 0, 0.5);
 
 .form-control {
   background: transparent;
-  color: $gray-700;
+  color: $light;
   border: 1px solid $gray-700;
 }
 
@@ -51,3 +49,12 @@ $gray-900: rgba(0, 0, 0, 0.5);
   font-size: 2rem;
   color: $light;
 }
+
+.form-container {
+  max-width: 320px;
+}
+
+.text-muted {
+  color: #b4b2b1 !important;
+}
+

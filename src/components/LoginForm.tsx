@@ -22,7 +22,7 @@ export const GET_CONFIG = {
 };
 
 export default function LoginForm(props: LoginFormProps) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const { openSignUpForm } = props;
 
@@ -39,44 +39,60 @@ export default function LoginForm(props: LoginFormProps) {
   };
 
   const handleClickSignIn = async (e: any) => {
-    e.preventDefault()
-    try{
+    e.preventDefault();
+    try {
       const response = await axios.get(baseURL + BIN_ID, GET_CONFIG);
-      setUsers(response.data.record.users)
-      users?.forEach(user => {
-        if(user?.email === email && user?.pw === pw){
-          if(email && pw){
-            dispatch(login({email, pw, online: true}))
+      setUsers(response.data.record.users);
+      users?.forEach((user) => {
+        if (user?.email === email && user?.pw === pw) {
+          if (email && pw) {
+            dispatch(login({ email, pw, online: true }));
           }
         }
       });
-    }catch(e){
+    } catch (e) {
       console.error(e);
     }
   };
 
   return (
-    <Form className="loginform">
-      <Form.Group>
-        <Form.Control
-          type="email"
-          placeholder="Email"
-          onChange={handleChangeEmail}
-        />
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          onChange={handleChangePw}
-        />
-
-        <Button variant="primary" type="submit" onClick={handleClickSignIn}>
-          Sign In
-        </Button>
-
-        <div>
-          Don't have an account? <span onClick={openSignUpForm}>Sign Up</span>
+    <>
+      <h1 className="display-3 text-center mb-5">Apple Notes</h1>
+      <form className="loginform-root container-sm form-container">
+        <div className="row">
+          <input
+            className="form-control"
+            type="email"
+            placeholder="Email"
+            onChange={handleChangeEmail}
+          />
         </div>
-      </Form.Group>
-    </Form>
+
+        <div className="row mb-3">
+          <input
+            className="form-control"
+            type="password"
+            placeholder="Password"
+            onChange={handleChangePw}
+          />
+        </div>
+
+        <div className="row mb-3">
+          <button
+            className="btn bg-transparent"
+            type="submit"
+            onClick={handleClickSignIn}
+          >
+            Sign In
+          </button>
+        </div>
+
+        <div className="row text-center">
+          <div>
+            Don't have an account? <span className="text-warning" onClick={openSignUpForm}>Sign Up</span>
+          </div>
+        </div>
+      </form>
+    </>
   );
 }

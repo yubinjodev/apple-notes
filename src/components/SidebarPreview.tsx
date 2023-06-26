@@ -6,9 +6,9 @@ export default function SidebarPreview() {
       </div>
 
       <div className="row fs-6">
-        <div className="col">Public</div>
+        <div className="col text-warning">Public</div>
         <div className="col">-</div>
-        <div className="col">Date</div>
+        <div className="col text-muted">Date</div>
       </div>
       <hr/>
     </section>

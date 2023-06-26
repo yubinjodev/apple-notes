@@ -31,11 +31,13 @@ export default function NotesEditor() {
   }
 
   return (
-    <main className="noteseditor container">
+    <div className="noteseditor-root container-fluid">
+      
       {userState ? <Editor/> : <LoginForm openSignUpForm={openSignUpForm}/>} 
+      
       {/* {screenId === "LoginForm" &&<LoginForm openSignUpForm={openSignUpForm}/>}
       {screenId === "SignUpForm" && signUpFormProps && <SignUpForm {...signUpFormProps}/>}
       {screenId === "Editor" && <Editor />} */}
-    </main>
+    </div>
   );
 }
