@@ -6,11 +6,11 @@ export default function SidebarPreview() {
       </div>
 
       <div className="row fs-6">
-        <div className="col text-warning">Public</div>
-        <div className="col">-</div>
-        <div className="col text-muted">Date</div>
+        <div className="col pe-0 text-warning">Public</div>
+        <div className="col px-0 text-center">-</div>
+        <div className="col ps-0 text-muted">Date</div>
       </div>
-      <hr/>
+      <hr />
     </section>
   );
 }
