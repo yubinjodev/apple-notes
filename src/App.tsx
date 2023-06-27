@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/__custom.scss" 
 
-import Window from "./features/Window";
+import Window from "./pages/Window";
 
 export default function App() {
   return (
