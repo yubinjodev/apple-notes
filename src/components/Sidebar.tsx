@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import SidebarPreview from "./SidebarPreview";
 import axios from "axios";
-import { baseURL } from "./SignUpForm";
-import { BIN_ID, GET_CONFIG } from "./LoginForm";
+import { BIN_ID, GET_CONFIG, baseURL } from "../utils/api";
 
 export default function Sidebar(){
 

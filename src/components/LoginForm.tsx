@@ -4,16 +4,9 @@ import { useState } from "react";
 import { LoginFormProps, Users } from "../typings/user";
 
 import { useDispatch } from "react-redux";
-import { login } from "../actions";
-import { X_ACCESS_KEY, X_MASTER_KEY, baseURL } from "./SignUpForm";
 
-export const BIN_ID = "6496c4129d312622a374cf7b";
-export const GET_CONFIG = {
-  headers: {
-    "X-Master-Key": X_MASTER_KEY,
-    "X-Access-Key": X_ACCESS_KEY,
-  },
-};
+import { login } from "../actions";
+import { BIN_ID, GET_CONFIG, baseURL } from "../utils/api";
 
 export default function LoginForm(props: LoginFormProps) {
   const dispatch = useDispatch();

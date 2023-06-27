@@ -8,17 +8,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 import { SignUpFormProps, User } from "../typings/user";
+import { POST_CONFIG, baseURL } from "../utils/api";
 
-export const baseURL = "https://api.jsonbin.io/v3/b/";
-export const X_MASTER_KEY = "$2b$10$r6LNY8lMtQvXzRP/ZfPasuJg9AW.ThYLsXWivowsi5kpi2NF4T2Ka";
-export const X_ACCESS_KEY = "$2b$10$.N5NTNbEHsXaUAILlE99Q./3FLOOq2izzW1IFpsKLb0LaX8BtD3oO"
-const CONFIG = {
-  headers: {
-    "Content-Type": "application/json",
-    "X-Master-Key":X_MASTER_KEY,
-    "X-Access-Key":X_ACCESS_KEY,
-  },
-};
 
 export default function SignUpForm(props: SignUpFormProps) {
   const dispatch = useDispatch();
@@ -39,7 +30,7 @@ export default function SignUpForm(props: SignUpFormProps) {
 
   const signUp = async () => {
     try {
-      await axios.post(baseURL, signUpInfo, CONFIG);
+      await axios.post(baseURL, signUpInfo, POST_CONFIG);
 
       alert("Sign Up Successful");
 
