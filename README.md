@@ -1,5 +1,7 @@
 # Apple Notes Clone
 
+![Screen Shot 2023-06-27 at 14 43 28](https://github.com/yubinjodev/apple-notes/assets/95195467/868f63fc-968b-43c9-ad0a-14897048e423)
+
 This project is a clone of the notes app on iOS built using React, TypeScript, Bootstrap, Redux, JSONbin and Axios. The purpose of this project is to **exercise, apply and practice** certain key skills and principles required in frontend web development.
 
 ## Table of Contents
