@@ -1,10 +1,11 @@
 import { useState } from "react";
 
 import LoginForm from "./LoginForm";
-import SignUpForm, { SignUpFormProps } from "./SignUpForm";
+import SignUpForm from "./SignUpForm";
 import Editor from "./Editor";
 
 import {useSelector} from "react-redux"
+import { SignUpFormProps } from "../typings/user";
 
 type ScreenId = "LoginForm" | "SignUpForm" | "Editor";
 

@@ -1,9 +1,4 @@
-import { User } from "../components/SignUpForm";
-
-export type Action = {
-    type:string;
-    payload: User | null;
-}
+import { User } from "../typings/user";
 
 export const login = (userInfo: User) =>{
     return{

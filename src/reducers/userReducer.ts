@@ -1,5 +1,5 @@
-import { Action } from "../actions";
-import { User } from "../components/SignUpForm";
+import { Action } from "../typings/store";
+import { User } from "../typings/user";
 
 const userReducer = (state: User = null, action: Action): unknown=>{
     switch(action.type){

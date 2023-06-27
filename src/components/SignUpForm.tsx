@@ -7,17 +7,7 @@ import { login } from "../actions";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-export type SignUpFormProps = {
-  openSignInForm: () => void;
-  openEditor: () => void;
-};
-
-export type User = {
-  email: string;
-  pw: string;
-  online: boolean;
-  
-} | null;
+import { SignUpFormProps, User } from "../typings/user";
 
 export const baseURL = "https://api.jsonbin.io/v3/b/";
 export const X_MASTER_KEY = "$2b$10$r6LNY8lMtQvXzRP/ZfPasuJg9AW.ThYLsXWivowsi5kpi2NF4T2Ka";
