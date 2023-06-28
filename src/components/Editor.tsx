@@ -20,10 +20,9 @@ export default function Editor() {
 
   const postNote = () => {
     try {
-      // axios.put(baseURL, notesReducer, POST_CONFIG)
       axios.put(
         "https://api.jsonbin.io/v3/b/649be4b29d312622a3771749",
-        note,
+        notesReducer,
         {
           headers: {
             "Content-Type": "application/json",
@@ -32,6 +31,7 @@ export default function Editor() {
           },
         }
       );
+      alert("Saved")
     } catch (e) {
       console.error(e);
     }
