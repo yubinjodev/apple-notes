@@ -25,10 +25,5 @@ export const useUsers = () => {
     fetchUsers();
   }, []);
 
-
-  useEffect(()=>{
-    console.log("useUsers",users);
-  },[users])
-
   return { users };
 };

@@ -22,9 +22,6 @@ export const useCurrentUser = () => {
     fetchCurrentUser();
   }, [users]);
 
-  useEffect(()=>{
-    console.log("useCurrentUser",currentUser);
-  },[currentUser])
 
   return { currentUser };
 };

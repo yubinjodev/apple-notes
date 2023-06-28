@@ -5,32 +5,25 @@ import { importNotes } from "../actions";
 import { useNotes } from "../hooks/useNotes";
 
 export default function Sidebar() {
+  const userState = useSelector((state: any) => state.userReducer);
+  const dispatch = useDispatch();
+  const { notes } = useNotes();
 
-  const userState = useSelector((state:any) => state.userReducer)
-  const dispatch = useDispatch()
-  const {notes} = useNotes()
-
-  useEffect(()=>{
-    const fetchCurrentUserNotes = ()=>{
-      if(userState){
-        dispatch(importNotes(notes))
+  useEffect(() => {
+    const fetchCurrentUserNotes = () => {
+      if (userState) {
+        dispatch(importNotes(notes));
       }
-    }
+    };
 
     fetchCurrentUserNotes();
-    console.log(notes);
-  },[notes])
-
-
+  }, [notes]);
 
   return (
     <aside className="sidebar-root">
-      
-      <SidebarPreview />
-      <SidebarPreview />
-      <SidebarPreview />
-      <SidebarPreview />
-      <SidebarPreview />
+      {notes?.map((note, idx) => (
+        <SidebarPreview key={idx} date={note?.date} details={note?.details} />
+      ))}
     </aside>
   );
 }

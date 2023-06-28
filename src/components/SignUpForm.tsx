@@ -39,7 +39,7 @@ export default function SignUpForm(props: SignUpFormProps) {
         openEditor();
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
