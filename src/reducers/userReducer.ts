@@ -1,5 +1,5 @@
-import { Action } from "../typings/store";
-import { User } from "../typings/user";
+import { Action } from "../types/store";
+import { User } from "../types/user";
 
 const userReducer = (state: User = null, action: Action): unknown=>{
     switch(action.type){

@@ -1,25 +1,11 @@
-import { useEffect, useState } from "react";
+import { useNotes } from "../hooks/useNotes";
+import { useUsers } from "../hooks/useUsers";
 import SidebarPreview from "./SidebarPreview";
-import axios from "axios";
-import { BIN_ID, GET_CONFIG, baseURL } from "../utils/api";
 
 export default function Sidebar() {
-  const [notes, setNotes] = useState(null);
+    const {notes} = useNotes();
 
-  const collectNotes = async () => {
-    try {
-      const response = await axios.get(baseURL + BIN_ID, GET_CONFIG);
-      const data = await response.data.record.users;
-
-      console.log(data);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  useEffect(() => {
-    collectNotes();
-  }, []);
+    console.log(notes);
 
   return (
     <aside className="sidebar-root">

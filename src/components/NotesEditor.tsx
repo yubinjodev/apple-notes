@@ -5,7 +5,7 @@ import SignUpForm from "./SignUpForm";
 import Editor from "./Editor";
 
 import {useSelector} from "react-redux"
-import { SignUpFormProps } from "../typings/user";
+import { SignUpFormProps } from "../types/user";
 
 type ScreenId = "LoginForm" | "SignUpForm" | "Editor";
 

@@ -1,4 +1,4 @@
-import { User } from "../typings/user";
+import { User } from "../types/user";
 
 export const login = (userInfo: User) =>{
     return{

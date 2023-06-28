@@ -7,7 +7,7 @@ import { login } from "../actions";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-import { SignUpFormProps, User } from "../typings/user";
+import { SignUpFormProps, User } from "../types/user";
 import { POST_CONFIG, baseURL } from "../utils/api";
 
 

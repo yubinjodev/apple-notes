@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-import { LoginFormProps, Users } from "../typings/user";
+import { LoginFormProps, Users } from "../types/user";
 
 import { useDispatch } from "react-redux";
 
