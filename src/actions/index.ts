@@ -1,3 +1,4 @@
+import { Notes } from "../types/notes";
 import { User } from "../types/user";
 
 export const login = (userInfo: User) =>{
@@ -10,5 +11,12 @@ export const login = (userInfo: User) =>{
 export const logout = () =>{
     return{
         type: "LOGOUT"
+    }
+}
+
+export const importNotes =(notes: Notes)=>{
+    return{
+        type: "IMPORT_NOTES",
+        payload: notes
     }
 }

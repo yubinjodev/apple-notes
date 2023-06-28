@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 
 import { login } from "../actions";
 import { BIN_ID, GET_CONFIG, baseURL } from "../utils/api";
+import { useNotes } from "../hooks/useNotes";
 
 export default function LoginForm(props: LoginFormProps) {
   const dispatch = useDispatch();
@@ -16,6 +17,8 @@ export default function LoginForm(props: LoginFormProps) {
   const [email, setEmail] = useState<string>();
   const [pw, setPw] = useState<string>();
   const [users, setUsers] = useState<Users>();
+
+  const {notes} = useNotes()
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);

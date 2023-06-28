@@ -15,7 +15,11 @@ export const useNotes = () => {
     };
 
     fetchCurrentUserNotes();
-  }, []);
+  }, [currentUser]);
+
+  useEffect(()=>{
+    console.log("useNotes",notes);
+  },[notes])
 
   return { notes };
 };

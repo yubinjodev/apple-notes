@@ -9,9 +9,9 @@ export const useCurrentUser = () => {
   const [currentUser, setCurrentUser] = useState<User>(null);
 
   useEffect(() => {
-    const fetchCurrentUser = () => {
+    const fetchCurrentUser = async () => {
       if (users && userState) {
-        const userResult = users.filter(
+        const userResult =  await users.filter(
           (user) => user?.email === userState.email
         );
 
@@ -20,7 +20,11 @@ export const useCurrentUser = () => {
     };
 
     fetchCurrentUser();
-  }, []);
+  }, [users]);
+
+  useEffect(()=>{
+    console.log("useCurrentUser",currentUser);
+  },[currentUser])
 
   return { currentUser };
 };
