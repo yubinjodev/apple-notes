@@ -6,6 +6,9 @@ const notesReducer = (state: Notes = null, action: Action): unknown =>{
         case "IMPORT_NOTES":
                 state = action.payload;
                 return state;
+        case "SAVE_NOTE":
+                state?.push(action.payload)
+                return state;
         default:
             return state
     }
