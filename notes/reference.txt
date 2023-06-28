@@ -1,0 +1,18 @@
+[SOLID Principle]
+Applying SOLID principles in React
+- https://konstantinlebedev.com/solid-in-react/
+This is the Only Right Way to Write React clean-code - SOLID 
+- https://youtu.be/MSq_DCRxOxw
+
+[Clean-code]
+Junior Vs Senior Code - How To Write Better Code As A Web Developer - React 
+- https://youtu.be/0yzoAbrjV6k
+React Naming Conventions You should follow as a Junior Developer - clean-code 
+- https://youtu.be/OEDE9KqQCkg
+
+[TypeScript]
+Typescript Mistakes Every Junior Developer should Avoid | clean-code 
+- https://youtu.be/ZCllX1p763U
+
+[Refactoring]
+-https://youtu.be/P_dGn8VVpUM
