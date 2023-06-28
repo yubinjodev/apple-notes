@@ -15,7 +15,7 @@ export default function Window() {
   };
 
   return (
-    <main className="window-root container-sm bg-transparent rounded-3 shadow">
+    <main className="window-root container-sm bg-transparent rounded-3 shadow overflow-hidden">
       <div className="row bg-transparent-darker p-2 rounded-top">
         <div className="col-6  d-flex align-items-center">
           <WindowControl />
@@ -28,7 +28,7 @@ export default function Window() {
           </div>
       </div>
 
-      <div className="row">
+      <div className="row full-height">
         <div className="col-2 py-3">
           <Sidebar />
         </div>

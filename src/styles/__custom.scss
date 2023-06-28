@@ -12,6 +12,10 @@
 $gray-500: rgba(0, 0, 0, 0.3);
 $gray-900: rgba(0, 0, 0, 0.5);
 
+.window-root{
+  height:80vh;
+}
+
 .bg-body {
   background-image: url("../assets/images/background.png");
   background-size: cover;
