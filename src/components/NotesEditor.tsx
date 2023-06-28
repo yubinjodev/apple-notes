@@ -35,7 +35,7 @@ export default function NotesEditor() {
     <div className="noteseditor-root container-fluid full-height d-flex flex-column justify-content-center align-items-center">
       
       {userState ? <Editor/> : <LoginForm openSignUpForm={openSignUpForm}/>} 
-      
+
       {/* {screenId === "LoginForm" &&<LoginForm openSignUpForm={openSignUpForm}/>}
       {screenId === "SignUpForm" && signUpFormProps && <SignUpForm {...signUpFormProps}/>}
       {screenId === "Editor" && <Editor />} */}

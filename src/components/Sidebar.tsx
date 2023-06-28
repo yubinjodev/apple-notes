@@ -27,5 +27,3 @@ export default function Sidebar() {
     </aside>
   );
 }
-
-// get the notes maam
