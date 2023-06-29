@@ -3,9 +3,10 @@ import SidebarPreview from "./SidebarPreview";
 import { useEffect } from "react";
 import { importNotes } from "../actions";
 import { useNotes } from "../hooks/useNotes";
+import { RootState } from "../types/store";
 
 export default function Sidebar() {
-  const userState = useSelector((state: any) => state.userReducer);
+  const userState = useSelector((state: RootState) => state.userReducer);
   const dispatch = useDispatch();
   const { notes } = useNotes();
 

@@ -25,7 +25,7 @@ export default function LoginForm(props: LoginFormProps) {
     setPw(e.target.value);
   };
 
-  const handleClickSignIn = async (e: any) => {
+  const handleClickSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const response = await axios.get(baseURL + BIN_ID, GET_CONFIG);

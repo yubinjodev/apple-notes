@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveNote } from "../actions";
 import axios from "axios";
 import { POST_CONFIG, X_ACCESS_KEY, X_MASTER_KEY, baseURL } from "../utils/api";
+import { RootState } from "../types/store";
 
 export default function Editor() {
   const [note, setNote] = useState<Note>(null);
   const dispatch = useDispatch();
-  const notesReducer = useSelector((state: any) => state?.notesReducer);
+  const notesReducer = useSelector((state: RootState) => state?.notesReducer);
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNote((prev) => ({

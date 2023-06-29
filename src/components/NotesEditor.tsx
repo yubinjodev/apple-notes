@@ -6,6 +6,7 @@ import Editor from "./Editor";
 
 import {useSelector} from "react-redux"
 import { SignUpFormProps } from "../types/user";
+import { RootState } from "../types/store";
 
 type ScreenId = "LoginForm" | "SignUpForm" | "Editor";
 
@@ -13,7 +14,7 @@ export default function NotesEditor() {
   const [screenId, setScreenId] = useState<ScreenId>("LoginForm");
   const [signUpFormProps, setSignUpFormProps] = useState<SignUpFormProps>();
 
-  const userState = useSelector((state: any) => state.userReducer);
+  const userState = useSelector((state: RootState) => state.userReducer);
 
   const openSignInForm = ()=>{
     setScreenId("LoginForm")

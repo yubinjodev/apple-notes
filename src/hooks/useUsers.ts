@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import { BIN_ID, GET_CONFIG, baseURL } from "../utils/api";
 import { useSelector } from "react-redux";
 import { Users } from "../types/user";
+import { RootState } from "../types/store";
 
 export const useUsers = () => {
   const [users, setUsers] = useState<Users>(null);
-  const userState = useSelector((state: any) => state.userReducer);
+  const userState = useSelector((state: RootState) => state.userReducer);
 
   useEffect(() => {
     const fetchUsers = async () => {

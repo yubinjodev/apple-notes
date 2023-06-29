@@ -5,10 +5,11 @@ import Sidebar from "../components/Sidebar";
 import WindowControl from "../components/WindowControl";
 
 import { logout } from "../actions";
+import { RootState } from "../types/store";
 
 export default function Window() {
   const dispatch = useDispatch();
-  const userState = useSelector((state: any) => state.userReducer);
+  const userState = useSelector((state: RootState) => state.userReducer);
 
   const handleClickLogOut = () => {
     dispatch(logout());
