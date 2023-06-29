@@ -13,8 +13,8 @@ export default function LoginForm(props: LoginFormProps) {
 
   const { openSignUpForm } = props;
 
-  const [email, setEmail] = useState<string>();
-  const [pw, setPw] = useState<string>();
+  const [email, setEmail] = useState<string>("");
+  const [pw, setPw] = useState<string>("");
   const [users, setUsers] = useState<Users>();
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,9 +45,13 @@ export default function LoginForm(props: LoginFormProps) {
   return (
     <>
       <h1 className="display-3 text-center mb-5">Apple Notes</h1>
-      <form className="loginform-root container-sm form-container">
+      <form
+        className="loginform-root container-sm form-container"
+        onSubmit={handleClickSignIn}
+      >
         <div className="row">
           <input
+            value={email}
             className="form-control"
             type="email"
             placeholder="Email"
@@ -57,6 +61,7 @@ export default function LoginForm(props: LoginFormProps) {
 
         <div className="row mb-3">
           <input
+            value={pw}
             className="form-control"
             type="password"
             placeholder="Password"
@@ -65,18 +70,17 @@ export default function LoginForm(props: LoginFormProps) {
         </div>
 
         <div className="row mb-3">
-          <button
-            className="btn bg-transparent"
-            type="submit"
-            onClick={handleClickSignIn}
-          >
+          <button className="btn bg-transparent" type="submit">
             Sign In
           </button>
         </div>
 
         <div className="row text-center">
           <div>
-            Don't have an account? <span className="text-warning" onClick={openSignUpForm}>Sign Up</span>
+            Don't have an account?{" "}
+            <span className="text-warning" onClick={openSignUpForm}>
+              Sign Up
+            </span>
           </div>
         </div>
       </form>
