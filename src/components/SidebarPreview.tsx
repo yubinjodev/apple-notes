@@ -1,12 +1,12 @@
 import { Notes } from "../types/notes";
 
 type SidebarPreviewProps = {
-  date?: Date,
-  details?:string;
-}
+  date: Date;
+  details: string;
+};
 
 export default function SidebarPreview(props: SidebarPreviewProps) {
-  const {date, details} = props;
+  const { date, details } = props;
 
   return (
     <section className="sidebarpreview-root container">

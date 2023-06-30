@@ -5,7 +5,7 @@ import { LoginFormProps, Users } from "../types/user";
 
 import { useDispatch } from "react-redux";
 
-import { login } from "../actions";
+import { importNotes, login } from "../actions";
 import { USER_BIN_ID, GET_CONFIG, baseURL } from "../utils/api";
 
 export default function LoginForm(props: LoginFormProps) {
@@ -26,7 +26,6 @@ export default function LoginForm(props: LoginFormProps) {
   };
 
   const handleClickSignIn = async (e: React.FormEvent) => {
-    console.log("start");
     e.preventDefault();
     try {
       const response = await axios.get(baseURL + USER_BIN_ID, GET_CONFIG);
@@ -47,10 +46,6 @@ export default function LoginForm(props: LoginFormProps) {
       console.error(e);
     }
   };
-
-  useEffect(() => {
-    // console.log(users);
-  }, [users]);
 
   return (
     <>

@@ -1,21 +1,35 @@
 import { useEffect, useState } from "react";
 
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { importNotes } from "../actions";
+import { RootState } from "../types/store";
+import { GET_CONFIG, NOTES_BIN_ID, baseURL } from "../utils/api";
 import { Notes } from "../types/notes";
-import { useCurrentUser } from "./useCurrentUser";
 
 export const useNotes = () => {
-  const [notes, setNotes] = useState<Notes>(null);
-  const { currentUser } = useCurrentUser();
+  const userState = useSelector((state: RootState) => state.userReducer);
+  const dispatch = useDispatch();
+
+  const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    const fetchCurrentUserNotes = () => {
-      if (currentUser) {
-        // setNotes(currentUser?.notes as Notes)
+    const fetchCurrentUserNotes = async () => {
+      if (userState) {
+        const response = await axios.get(baseURL + NOTES_BIN_ID, GET_CONFIG);
+        const notesData = await response.data.record;
+
+        for (const id in notesData) {
+          if (id === userState.email) {
+            setNotes(notesData[id]);
+            dispatch(importNotes(notesData[id]));
+          }
+        }
       }
     };
 
     fetchCurrentUserNotes();
-  }, [currentUser]);
+  }, []);
 
   return { notes };
 };
