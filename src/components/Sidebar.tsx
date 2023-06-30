@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react";
 import { useNotes } from "../hooks/useNotes";
-import SidebarPreview from "./SidebarPreview";
-import { Note, Notes } from "../types/notes";
 
 export default function Sidebar() {
   const { notes } = useNotes();
@@ -17,3 +14,8 @@ export default function Sidebar() {
     </aside>
   );
 }
+
+//TODO: display notes.
+//TODO: post notes.
+//TODO: edit notes.
+//TODO: delete notes.
