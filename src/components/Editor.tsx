@@ -32,7 +32,7 @@ export default function Editor() {
           },
         }
       );
-      alert("Saved")
+      alert("Saved");
     } catch (e) {
       console.error(e);
     }
@@ -40,7 +40,8 @@ export default function Editor() {
 
   const handleClickSaveNote = () => {
     if (note) {
-      dispatch(saveNote(note));
+      const noteObj = { [note.date.toString()]: note.details.toString() };
+      dispatch(saveNote(noteObj));
       postNote();
     }
   };
