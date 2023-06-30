@@ -5,13 +5,13 @@ import { useCurrentUser } from "./useCurrentUser";
 
 export const useNotes = () => {
   const [notes, setNotes] = useState<Notes>(null);
-  const {currentUser} = useCurrentUser();
+  const { currentUser } = useCurrentUser();
 
   useEffect(() => {
     const fetchCurrentUserNotes = () => {
-        if(currentUser){
-            setNotes(currentUser?.notes as Notes)
-        }
+      if (currentUser) {
+        // setNotes(currentUser?.notes as Notes)
+      }
     };
 
     fetchCurrentUserNotes();

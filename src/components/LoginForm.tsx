@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { LoginFormProps, Users } from "../types/user";
 
@@ -15,7 +15,7 @@ export default function LoginForm(props: LoginFormProps) {
 
   const [email, setEmail] = useState<string>("");
   const [pw, setPw] = useState<string>("");
-  const [users, setUsers] = useState<Users>();
+  const [users, setUsers] = useState<any>([]);
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -26,21 +26,31 @@ export default function LoginForm(props: LoginFormProps) {
   };
 
   const handleClickSignIn = async (e: React.FormEvent) => {
+    console.log("start");
     e.preventDefault();
     try {
       const response = await axios.get(baseURL + USER_BIN_ID, GET_CONFIG);
-      setUsers(response.data.record.users);
-      users?.forEach((user) => {
-        if (user?.email === email && user?.pw === pw) {
-          if (email && pw) {
-            dispatch(login({ email, pw, online: true }));
-          }
+      const userData = await response.data.record;
+
+      for (const id in userData) {
+        users.push({ [id]: userData[id] });
+      }
+
+      users.forEach((user: any) => {
+        const id = Object.keys(user).toString();
+        const dbPw = Object.values(user).toString();
+        if (id === email && dbPw === pw) {
+          dispatch(login({ email: id, pw: dbPw }));
         }
       });
     } catch (e) {
       console.error(e);
     }
   };
+
+  useEffect(() => {
+    // console.log(users);
+  }, [users]);
 
   return (
     <>

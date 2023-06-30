@@ -3,12 +3,9 @@ import { Note } from "./notes";
 export type User = {
   email: string;
   pw: string;
-  online: boolean;
-  notes?: Note[]
 } | null;
 
 export type Users = User[] | null;
-
 
 export type LoginFormProps = {
   openSignUpForm: () => void;

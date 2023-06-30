@@ -10,7 +10,6 @@ import Button from "react-bootstrap/Button";
 import { SignUpFormProps, User } from "../types/user";
 import { POST_CONFIG, baseURL } from "../utils/api";
 
-
 export default function SignUpForm(props: SignUpFormProps) {
   const dispatch = useDispatch();
 
@@ -45,7 +44,7 @@ export default function SignUpForm(props: SignUpFormProps) {
 
   const handleClickSignUp = () => {
     if (email && pw) {
-      setSignupInfo({ email, pw, online: true });
+      setSignupInfo({ email, pw });
       signUp();
     }
   };
