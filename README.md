@@ -1,5 +1,7 @@
 # Apple Notes Clone
 
+![Screen Shot 2023-06-27 at 14 43 28](https://github.com/yubinjodev/apple-notes/assets/95195467/868f63fc-968b-43c9-ad0a-14897048e423)
+
 This project is a clone of the notes app on iOS built using React, TypeScript, Bootstrap, Redux, JSONbin and Axios. The purpose of this project is to **exercise, apply and practice** certain key skills and principles required in frontend web development.
 
 ## Table of Contents
@@ -50,24 +52,24 @@ This will start the application at http://localhost:3000 in your browser. Any ch
   - Login
   - Sign up
 - CRUD
-  - create notes
-  - see your saved notes
-  - edit your notes
-  - delete your notes
+  - Create notes
+  - See your saved notes
+  - Edit your notes
+  - Delete your notes
 
 ## Technologies
 
 This project utilizes the following technologies:
 
-- Language : typescript
-- Framework : react
-- Build tools : npm
-- CSS framework : bootstrap
+- Language : Typescript
+- Framework : React
+- Build tools : NPM
+- CSS Framework : Bootstrap
 - "Backend" : JSONBin
-- State management : redux, Redux Persist
+- State Management : Redux & Redux Persist
 - API Client : Axios
 - Unit testing : Jest
-- E2E testing : Selenium
+- E2E testing : Playwright
 
 ## Objective
 
@@ -82,10 +84,13 @@ This project utilizes the following technologies:
 - Getting familiar with authentication
 - Exercise async handling
 - Executing database usage and API fetching
+- Engaging in intermediate TypeScript features and clean-code naming conventions
 
 ## Contribution
 
-Contributions to this project are welcome. If you find any issues or have suggestions for improvements, feel free to open a new issue or submit a pull request.
+Contributions to this project are welcome.
+If you find any issues or have suggestions for improvements, feel free to open a new issue or submit a pull request.
+Not sure how to do that? Check [this](https://opensource.com/article/19/11/first-open-source-contribution-fork-clone) out
 
 When contributing, please adhere to the existing code style and follow the GitHub Flow for collaboration.
 
