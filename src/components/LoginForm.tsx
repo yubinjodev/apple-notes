@@ -6,7 +6,7 @@ import { LoginFormProps, Users } from "../types/user";
 import { useDispatch } from "react-redux";
 
 import { importNotes, login } from "../actions";
-import { USER_BIN_ID, GET_CONFIG, baseURL } from "../utils/api";
+import { GET_CONFIG, BASEURL } from "../utils/api";
 
 export default function LoginForm(props: LoginFormProps) {
   const dispatch = useDispatch();
@@ -28,7 +28,10 @@ export default function LoginForm(props: LoginFormProps) {
   const handleClickSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.get(baseURL + USER_BIN_ID, GET_CONFIG);
+      const response = await axios.get(
+        BASEURL + process.env.REACT_APP_USER_BIN_ID,
+        GET_CONFIG
+      );
       const userData = await response.data.record;
 
       for (const id in userData) {
@@ -46,7 +49,7 @@ export default function LoginForm(props: LoginFormProps) {
       console.error(e);
     }
   };
-
+  console.log(GET_CONFIG);
   return (
     <>
       <h1 className="display-3 text-center mb-5">Apple Notes</h1>

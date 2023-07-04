@@ -3,7 +3,7 @@ import { Note, Notes } from "../types/notes";
 import { useDispatch, useSelector } from "react-redux";
 import { saveNote } from "../actions";
 import axios from "axios";
-import { POST_CONFIG, X_ACCESS_KEY, X_MASTER_KEY, baseURL } from "../utils/api";
+import { POST_CONFIG, BASEURL } from "../utils/api";
 import { RootState } from "../types/store";
 
 export default function Editor() {
@@ -27,8 +27,8 @@ export default function Editor() {
         {
           headers: {
             "Content-Type": "application/json",
-            "X-Master-Key": X_MASTER_KEY,
-            "X-Access-Key": X_ACCESS_KEY,
+            "X-Master-Key": process.env.REACT_APP_X_MASTER_KEY,
+            "X-Access-Key": process.env.REACT_APP_X_ACCESS_KEY,
           },
         }
       );

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { importNotes } from "../actions";
 import { RootState } from "../types/store";
-import { GET_CONFIG, NOTES_BIN_ID, baseURL } from "../utils/api";
+import { GET_CONFIG, BASEURL } from "../utils/api";
 import { Notes } from "../types/notes";
 
 export const useNotes = () => {
@@ -16,7 +16,10 @@ export const useNotes = () => {
   useEffect(() => {
     const fetchCurrentUserNotes = async () => {
       if (userState) {
-        const response = await axios.get(baseURL + NOTES_BIN_ID, GET_CONFIG);
+        const response = await axios.get(
+          BASEURL + process.env.REACT_APP_NOTES_BIN_ID,
+          GET_CONFIG
+        );
         const notesData = await response.data.record;
 
         for (const id in notesData) {

@@ -8,7 +8,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 import { SignUpFormProps, User } from "../types/user";
-import { POST_CONFIG, baseURL } from "../utils/api";
+import { POST_CONFIG, BASEURL } from "../utils/api";
 
 export default function SignUpForm(props: SignUpFormProps) {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ export default function SignUpForm(props: SignUpFormProps) {
 
   const signUp = async () => {
     try {
-      await axios.post(baseURL, signUpInfo, POST_CONFIG);
+      await axios.post(BASEURL, signUpInfo, POST_CONFIG);
 
       alert("Sign Up Successful");
 
