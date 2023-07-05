@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../actions";
 
-import { SignUpFormProps, User, Users } from "../types/user";
+import { SignUpFormProps } from "../types/user";
 import { BASEURL, GET_CONFIG, POST_CONFIG } from "../utils/api";
 
 export default function SignUpForm(props: SignUpFormProps) {
@@ -24,27 +24,8 @@ export default function SignUpForm(props: SignUpFormProps) {
     setPw(e.target.value);
   };
 
-  const addUser = () => {
-    if (users) {
-      setUsers((prev: any) => ({
-        ...prev,
-        [email]: pw,
-      }));
-
-      try {
-        axios.put(
-          BASEURL + process.env.REACT_APP_USER_BIN_ID,
-          users,
-          POST_CONFIG
-        );
-        dispatch(login({ email, pw }));
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  };
-
   const fetchUsers = async () => {
+    console.log("2 fetch users");
     try {
       const response = await axios.get(
         BASEURL + process.env.REACT_APP_USER_BIN_ID,
@@ -52,15 +33,25 @@ export default function SignUpForm(props: SignUpFormProps) {
       );
       const userData = await response.data.record;
 
-      setUsers(userData);
-
-      addUser();
+      if (userData) {
+        setUsers(userData);
+        addUser();
+      }
     } catch (e) {
       console.error(e);
     }
   };
 
+  const addUser = async () => {
+    console.log("3 add user");
+    await setUsers((prev: any) => ({
+      ...prev,
+      [email]: pw,
+    }));
+  };
+
   const signUp = () => {
+    console.log("1 sign up clicked");
     fetchUsers();
   };
 
@@ -70,6 +61,24 @@ export default function SignUpForm(props: SignUpFormProps) {
       signUp();
     }
   };
+
+  useEffect(() => {
+    console.log(users);
+
+    if (users) {
+      try {
+        axios.put(
+          BASEURL + process.env.REACT_APP_USER_BIN_ID,
+          users,
+          POST_CONFIG
+        );
+        alert("Sign Up Successful.");
+        dispatch(login({ email, pw }));
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }, [users]);
 
   return (
     <>
