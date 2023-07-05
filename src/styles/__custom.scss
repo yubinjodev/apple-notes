@@ -1,0 +1,102 @@
+@import "node_modules/bootstrap/scss/bootstrap";
+
+:root {
+  --bs-body-color: #fff;
+}
+
+::placeholder {
+  color: $gray-700 !important;
+  opacity: 1 !important;
+}
+
+$gray-500: rgba(0, 0, 0, 0.3);
+$gray-900: rgba(0, 0, 0, 0.5);
+
+.window-root{
+  height:80vh;
+}
+
+.bg-body {
+  background-image: url("../assets/images/background.png");
+  background-size: cover;
+  height: 100vh;
+}
+
+.bg-transparent {
+  backdrop-filter: blur(20px);
+  background-color: $gray-500 !important;
+}
+
+.bg-transparent-dark {
+  background-color: $gray-500;
+}
+
+.bg-transparent-darker {
+  background-color: $gray-900;
+}
+
+.form-control {
+  background: transparent;
+  color: $light;
+  border: 1px solid $gray-700;
+}
+
+.form-control:focus {
+  background: transparent;
+  color: $gray-700;
+  border: 1px solid $light;
+  outline: none;
+  box-shadow: none;
+}
+
+.bi {
+  font-size: 2rem;
+  color: $light;
+}
+
+.form-container {
+  max-width: 320px;
+}
+
+.text-muted {
+  color: #b4b2b1 !important;
+}
+
+textarea.form-control{
+    border:none;
+    resize: none;
+    height: 100%;
+}
+
+textarea.form-control:focus{
+    border:none;
+}
+
+textarea.form-control::placeholder{
+    color: $light !important;
+}
+
+
+.full-height{
+    height:100%;
+}
+
+ /* width */
+ ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: red;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: red;
+  } 

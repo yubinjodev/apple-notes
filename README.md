@@ -81,14 +81,14 @@ This project utilizes the following technologies:
   - Dependency inversion
 - Utilize custom hooks
 - Practice state management through Redux
-- Getting familiar with authentication 
+- Getting familiar with authentication
 - Exercise async handling
 - Executing database usage and API fetching
 - Engaging in intermediate TypeScript features and clean-code naming conventions
 
 ## Contribution
 
-Contributions to this project are welcome. 
+Contributions to this project are welcome.
 If you find any issues or have suggestions for improvements, feel free to open a new issue or submit a pull request.
 Not sure how to do that? Check [this](https://opensource.com/article/19/11/first-open-source-contribution-fork-clone) out
 
