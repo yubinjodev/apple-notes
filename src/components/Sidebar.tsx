@@ -3,7 +3,7 @@ import { useNotes } from "../hooks/useNotes";
 export default function Sidebar() {
   const { notes } = useNotes();
 
-  console.log(notes);
+  // console.log(notes);
 
   return (
     <aside className="sidebar-root">

@@ -1,23 +1,20 @@
-import { useState } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { login } from "../actions";
 
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-
-import { SignUpFormProps, User } from "../types/user";
-import { POST_CONFIG, BASEURL } from "../utils/api";
+import { SignUpFormProps, User, Users } from "../types/user";
+import { BASEURL, GET_CONFIG, POST_CONFIG } from "../utils/api";
 
 export default function SignUpForm(props: SignUpFormProps) {
   const dispatch = useDispatch();
 
   const { openSignInForm } = props;
 
-  const [email, setEmail] = useState<string>();
-  const [pw, setPw] = useState<string>();
-  const [signUpInfo, setSignupInfo] = useState<User>();
+  const [email, setEmail] = useState<string>("");
+  const [pw, setPw] = useState<string>("");
+  const [users, setUsers] = useState<any>(null);
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -27,23 +24,49 @@ export default function SignUpForm(props: SignUpFormProps) {
     setPw(e.target.value);
   };
 
-  const signUp = async () => {
+  const fetchUsers = async () => {
     try {
-      await axios.post(BASEURL, signUpInfo, POST_CONFIG);
+      const response = await axios.get(
+        BASEURL + process.env.REACT_APP_USER_BIN_ID,
+        GET_CONFIG
+      );
+      const userData = await response.data.record;
 
-      alert("Sign Up Successful");
+      setUsers(userData);
 
-      if (signUpInfo) {
-        dispatch(login(signUpInfo));
-      }
+      addUser();
     } catch (e) {
       console.error(e);
     }
   };
 
-  const handleClickSignUp = () => {
+  const addUser = () => {
+    if (users) {
+      setUsers((prev: any) => ({
+        ...prev,
+        [email]: pw,
+      }));
+
+      try {
+        axios.put(
+          BASEURL + process.env.REACT_APP_USER_BIN_ID,
+          users,
+          POST_CONFIG
+        );
+        dispatch(login({ email, pw }));
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  };
+
+  const signUp = () => {
+    fetchUsers();
+  };
+
+  const handleClickSignUp = (e: React.FormEvent) => {
+    e.preventDefault();
     if (email && pw) {
-      setSignupInfo({ email, pw });
       signUp();
     }
   };
