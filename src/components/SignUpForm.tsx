@@ -25,7 +25,6 @@ export default function SignUpForm(props: SignUpFormProps) {
   };
 
   const fetchUsers = async () => {
-    console.log("2 fetch users");
     try {
       const response = await axios.get(
         BASEURL + process.env.REACT_APP_USER_BIN_ID,
@@ -43,7 +42,6 @@ export default function SignUpForm(props: SignUpFormProps) {
   };
 
   const addUser = async () => {
-    console.log("3 add user");
     await setUsers((prev: any) => ({
       ...prev,
       [email]: pw,
@@ -51,7 +49,6 @@ export default function SignUpForm(props: SignUpFormProps) {
   };
 
   const signUp = () => {
-    console.log("1 sign up clicked");
     fetchUsers();
   };
 
@@ -63,8 +60,6 @@ export default function SignUpForm(props: SignUpFormProps) {
   };
 
   useEffect(() => {
-    console.log(users);
-
     if (users) {
       try {
         axios.put(
