@@ -18,15 +18,19 @@ export default function Window() {
   return (
     <main className="window-root container-sm bg-transparent rounded-3 shadow overflow-hidden">
       <div className="row bg-transparent-darker p-2 rounded-top">
-        <div className="col-6  d-flex align-items-center">
+        <div className="col-7  d-flex align-items-center">
           <WindowControl />
         </div>
-        <div className="col-6 ps-5">
+        <div className="col-2 d-flex justify-content-end">
+          {userState && (
+            <button onClick={handleClickLogOut} className="btn btn-primary">
+              Sign Out
+            </button>
+          )}
+        </div>
+        <div className="col-3">
           <Searchbar />
         </div>
-        <div className="col">
-            {userState && <button onClick={handleClickLogOut}>log out</button>}
-          </div>
       </div>
 
       <div className="row full-height">

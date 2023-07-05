@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 
-import { LoginFormProps, Users } from "../types/user";
+import { LoginFormProps } from "../types/user";
 
 import { useDispatch } from "react-redux";
 
 import { login } from "../actions";
-import { BIN_ID, GET_CONFIG, baseURL } from "../utils/api";
+import { BASEURL, GET_CONFIG } from "../utils/api";
 
 export default function LoginForm(props: LoginFormProps) {
   const dispatch = useDispatch();
@@ -15,7 +15,8 @@ export default function LoginForm(props: LoginFormProps) {
 
   const [email, setEmail] = useState<string>("");
   const [pw, setPw] = useState<string>("");
-  const [users, setUsers] = useState<Users>();
+  const [users, setUsers] = useState<any>([]);
+  const [error, setError] = useState<string>("");
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -28,20 +29,30 @@ export default function LoginForm(props: LoginFormProps) {
   const handleClickSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.get(baseURL + BIN_ID, GET_CONFIG);
-      setUsers(response.data.record.users);
-      users?.forEach((user) => {
-        if (user?.email === email && user?.pw === pw) {
-          if (email && pw) {
-            dispatch(login({ email, pw, online: true }));
-          }
+      const response = await axios.get(
+        BASEURL + process.env.REACT_APP_USER_BIN_ID,
+        GET_CONFIG
+      );
+      const userData = await response.data.record;
+
+      for (const id in userData) {
+        users.push({ [id]: userData[id] });
+      }
+
+      users.forEach((user: any) => {
+        const id = Object.keys(user).toString();
+        const dbPw = Object.values(user).toString();
+        if (id === email && dbPw === pw) {
+          setError("");
+          dispatch(login({ email: id, pw: dbPw }));
         }
       });
+
+      setError("Invalid email or password.");
     } catch (e) {
       console.error(e);
     }
   };
-
   return (
     <>
       <h1 className="display-3 text-center mb-5">Apple Notes</h1>
@@ -50,6 +61,7 @@ export default function LoginForm(props: LoginFormProps) {
         onSubmit={handleClickSignIn}
       >
         <div className="row">
+          <p className="text-danger text-center">{error}</p>
           <input
             value={email}
             className="form-control"
@@ -78,7 +90,11 @@ export default function LoginForm(props: LoginFormProps) {
         <div className="row text-center">
           <div>
             Don't have an account?{" "}
-            <span className="text-warning" onClick={openSignUpForm}>
+            <span
+              className="text-warning"
+              onClick={openSignUpForm}
+              role="button"
+            >
               Sign Up
             </span>
           </div>

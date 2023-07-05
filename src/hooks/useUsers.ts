@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { BIN_ID, GET_CONFIG, baseURL } from "../utils/api";
+import { GET_CONFIG, BASEURL } from "../utils/api";
 import { useSelector } from "react-redux";
 import { Users } from "../types/user";
 import { RootState } from "../types/store";
@@ -11,17 +11,20 @@ export const useUsers = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-        try {
-          if (userState) {
-            const response = await axios.get(baseURL + BIN_ID, GET_CONFIG);
-            const data = await response.data.record.users;
-    
-            setUsers(data);
-          }
-        } catch (e) {
-          console.error(e);
+      try {
+        if (userState) {
+          const response = await axios.get(
+            BASEURL + process.env.REACT_APP_USER_BIN_ID,
+            GET_CONFIG
+          );
+          const data = await response.data.record.users;
+
+          setUsers(data);
         }
-      };
+      } catch (e) {
+        console.error(e);
+      }
+    };
 
     fetchUsers();
   }, []);
