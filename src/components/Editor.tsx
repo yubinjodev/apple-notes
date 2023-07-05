@@ -48,7 +48,7 @@ export default function Editor() {
 
   return (
     <>
-      <button onClick={handleClickSaveNote}>save</button>
+      {/* <button onClick={handleClickSaveNote}>save</button> */}
       <textarea
         className="editor-root form-control py-5"
         onChange={handleChangeInput}

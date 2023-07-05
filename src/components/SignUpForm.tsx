@@ -24,22 +24,6 @@ export default function SignUpForm(props: SignUpFormProps) {
     setPw(e.target.value);
   };
 
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get(
-        BASEURL + process.env.REACT_APP_USER_BIN_ID,
-        GET_CONFIG
-      );
-      const userData = await response.data.record;
-
-      setUsers(userData);
-
-      addUser();
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   const addUser = () => {
     if (users) {
       setUsers((prev: any) => ({
@@ -57,6 +41,22 @@ export default function SignUpForm(props: SignUpFormProps) {
       } catch (e) {
         console.error(e);
       }
+    }
+  };
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get(
+        BASEURL + process.env.REACT_APP_USER_BIN_ID,
+        GET_CONFIG
+      );
+      const userData = await response.data.record;
+
+      setUsers(userData);
+
+      addUser();
+    } catch (e) {
+      console.error(e);
     }
   };
 
