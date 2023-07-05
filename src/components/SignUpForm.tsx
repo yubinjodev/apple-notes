@@ -49,30 +49,51 @@ export default function SignUpForm(props: SignUpFormProps) {
   };
 
   return (
-    <Form className="signupform container">
-      <Form.Group>
-        <Form.Control
-          type="email"
-          placeholder="Email"
-          onChange={handleChangeEmail}
-        />
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          onChange={handleChangePw}
-        />
-
-        <Button variant="primary" type="submit" onClick={handleClickSignUp}>
-          Sign Up
-        </Button>
-
-        <div>
-          Already have an account?{" "}
-          <span onClick={openSignInForm} role="button">
-            Sign In
-          </span>
+    <>
+      <h1 className="display-3 text-center mb-5">Apple Notes</h1>
+      <form
+        className="loginform-root container-sm form-container"
+        onSubmit={handleClickSignUp}
+      >
+        <div className="row">
+          <input
+            value={email}
+            className="form-control"
+            type="email"
+            placeholder="Email"
+            onChange={handleChangeEmail}
+          />
         </div>
-      </Form.Group>
-    </Form>
+
+        <div className="row mb-3">
+          <input
+            value={pw}
+            className="form-control"
+            type="password"
+            placeholder="Password"
+            onChange={handleChangePw}
+          />
+        </div>
+
+        <div className="row mb-3">
+          <button className="btn bg-transparent" type="submit">
+            Sign Up
+          </button>
+        </div>
+
+        <div className="row text-center">
+          <div>
+            Already have an account?{" "}
+            <span
+              className="text-warning"
+              onClick={openSignInForm}
+              role="button"
+            >
+              Sign In
+            </span>
+          </div>
+        </div>
+      </form>
+    </>
   );
 }
