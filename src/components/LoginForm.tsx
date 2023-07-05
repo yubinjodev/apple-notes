@@ -1,12 +1,12 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import { LoginFormProps, Users } from "../types/user";
+import { LoginFormProps } from "../types/user";
 
 import { useDispatch } from "react-redux";
 
-import { importNotes, login } from "../actions";
-import { GET_CONFIG, BASEURL } from "../utils/api";
+import { login } from "../actions";
+import { BASEURL, GET_CONFIG } from "../utils/api";
 
 export default function LoginForm(props: LoginFormProps) {
   const dispatch = useDispatch();
@@ -16,6 +16,7 @@ export default function LoginForm(props: LoginFormProps) {
   const [email, setEmail] = useState<string>("");
   const [pw, setPw] = useState<string>("");
   const [users, setUsers] = useState<any>([]);
+  const [error, setError] = useState<string>("");
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -42,9 +43,12 @@ export default function LoginForm(props: LoginFormProps) {
         const id = Object.keys(user).toString();
         const dbPw = Object.values(user).toString();
         if (id === email && dbPw === pw) {
+          setError("");
           dispatch(login({ email: id, pw: dbPw }));
         }
       });
+
+      setError("Invalid email or password.");
     } catch (e) {
       console.error(e);
     }
@@ -57,6 +61,7 @@ export default function LoginForm(props: LoginFormProps) {
         onSubmit={handleClickSignIn}
       >
         <div className="row">
+          <p className="text-danger text-center">{error}</p>
           <input
             value={email}
             className="form-control"

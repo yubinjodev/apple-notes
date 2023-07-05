@@ -15,6 +15,7 @@ export default function SignUpForm(props: SignUpFormProps) {
   const [email, setEmail] = useState<string>("");
   const [pw, setPw] = useState<string>("");
   const [users, setUsers] = useState<any>(null);
+  const [error, setError] = useState<string>("");
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -34,7 +35,8 @@ export default function SignUpForm(props: SignUpFormProps) {
 
       if (userData) {
         setUsers(userData);
-        addUser();
+
+        infoValidation(userData);
       }
     } catch (e) {
       console.error(e);
@@ -52,15 +54,54 @@ export default function SignUpForm(props: SignUpFormProps) {
     fetchUsers();
   };
 
+  const infoValidation = (userData: object) => {
+    console.log(userData);
+
+    const emailChecker = () => {
+      let flag = 0;
+      for (const emailData in userData) {
+        if (emailData === email) {
+          flag = 1;
+        }
+      }
+
+      return flag;
+    };
+
+    const flag = emailChecker();
+
+    for (const emailData in userData) {
+      if (emailData === email) {
+        setError("An account with that email already exists.");
+      }
+      if (pw.length <= 4 && !flag) {
+        setError("none");
+      }
+    }
+
+    if (pw.length < 4) {
+      setError("Your password should be at least 4 characters long.");
+    }
+  };
+
   const handleClickSignUp = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (email && pw) {
       signUp();
     }
   };
 
   useEffect(() => {
-    if (users) {
+    if (error === "none") {
+      addUser();
+    }
+  }, [error]);
+
+  useEffect(() => {
+    console.log(users);
+
+    if (error === "none" && users) {
       try {
         axios.put(
           BASEURL + process.env.REACT_APP_USER_BIN_ID,
@@ -83,6 +124,7 @@ export default function SignUpForm(props: SignUpFormProps) {
         onSubmit={handleClickSignUp}
       >
         <div className="row">
+          <p className="text-danger text-center">{error !== "none" && error}</p>
           <input
             value={email}
             className="form-control"
