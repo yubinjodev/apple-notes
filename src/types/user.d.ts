@@ -13,5 +13,4 @@ export type LoginFormProps = {
 
 export type SignUpFormProps = {
   openSignInForm: () => void;
-  openEditor: () => void;
 };

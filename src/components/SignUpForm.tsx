@@ -13,7 +13,7 @@ import { POST_CONFIG, BASEURL } from "../utils/api";
 export default function SignUpForm(props: SignUpFormProps) {
   const dispatch = useDispatch();
 
-  const { openSignInForm, openEditor } = props;
+  const { openSignInForm } = props;
 
   const [email, setEmail] = useState<string>();
   const [pw, setPw] = useState<string>();
@@ -35,7 +35,6 @@ export default function SignUpForm(props: SignUpFormProps) {
 
       if (signUpInfo) {
         dispatch(login(signUpInfo));
-        openEditor();
       }
     } catch (e) {
       console.error(e);
@@ -68,7 +67,10 @@ export default function SignUpForm(props: SignUpFormProps) {
         </Button>
 
         <div>
-          Already have an account? <span onClick={openSignInForm}>Sign In</span>
+          Already have an account?{" "}
+          <span onClick={openSignInForm} role="button">
+            Sign In
+          </span>
         </div>
       </Form.Group>
     </Form>

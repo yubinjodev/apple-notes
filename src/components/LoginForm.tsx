@@ -49,7 +49,6 @@ export default function LoginForm(props: LoginFormProps) {
       console.error(e);
     }
   };
-  console.log(GET_CONFIG);
   return (
     <>
       <h1 className="display-3 text-center mb-5">Apple Notes</h1>
@@ -86,7 +85,11 @@ export default function LoginForm(props: LoginFormProps) {
         <div className="row text-center">
           <div>
             Don't have an account?{" "}
-            <span className="text-warning" onClick={openSignUpForm}>
+            <span
+              className="text-warning"
+              onClick={openSignUpForm}
+              role="button"
+            >
               Sign Up
             </span>
           </div>

@@ -16,8 +16,3 @@ export default function Sidebar() {
     </aside>
   );
 }
-
-//TODO: display notes.
-//TODO: post notes.
-//TODO: edit notes.
-//TODO: delete notes.
