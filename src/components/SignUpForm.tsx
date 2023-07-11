@@ -44,9 +44,9 @@ export default function SignUpForm(props: SignUpFormProps) {
     }
   };
 
-  const addUser = async () => {
-    console.log("3 add user");
-    await setUsers((prev: any) => ({
+  const addUser = () => {
+    console.log("3 add user", { email, pw });
+    setUsers((prev: any) => ({
       ...prev,
       [email]: pw,
     }));
@@ -58,7 +58,7 @@ export default function SignUpForm(props: SignUpFormProps) {
   };
 
   const infoValidation = (userData: object) => {
-    console.log(userData);
+    console.log("info validation", userData);
 
     const emailChecker = () => {
       let flag = 0;
@@ -95,6 +95,40 @@ export default function SignUpForm(props: SignUpFormProps) {
     }
   };
 
+  const saveNewNotesTableWithNewUser = (data: any) => {
+    try {
+      axios.put(
+        BASEURL + process.env.REACT_APP_NOTES_BIN_ID,
+        data,
+        POST_CONFIG
+      );
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const insertUserToNotesTable = (data: any) => {
+    data[email] = {};
+    saveNewNotesTableWithNewUser(data);
+  };
+
+  const fetchNotes = async () => {
+    try {
+      const response = await axios.get(
+        BASEURL + process.env.REACT_APP_NOTES_BIN_ID,
+        GET_CONFIG
+      );
+      const data = await response.data.record;
+      await insertUserToNotesTable(data);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const addUserToNotesTable = () => {
+    fetchNotes();
+  };
+
   useEffect(() => {
     if (error === "none") {
       addUser();
@@ -102,21 +136,30 @@ export default function SignUpForm(props: SignUpFormProps) {
   }, [error]);
 
   useEffect(() => {
-    console.log(users);
+    console.log("users state:", users);
 
-    if (error === "none" && users) {
-      try {
-        axios.put(
-          BASEURL + process.env.REACT_APP_USER_BIN_ID,
-          users,
-          POST_CONFIG
-        );
-        alert("Sign Up Successful.");
-        dispatch(login({ email, pw }));
-      } catch (e) {
-        console.error(e);
+    const postUser = async () => {
+      if (error === "none" && users) {
+        try {
+          const response = await axios.put(
+            BASEURL + process.env.REACT_APP_USER_BIN_ID,
+            users,
+            POST_CONFIG
+          );
+          const status = await response.status;
+          console.log(status);
+          if (status === 200) {
+            alert("Sign Up Successful.");
+            dispatch(login({ email, pw }));
+            addUserToNotesTable();
+          }
+        } catch (e) {
+          console.error(e);
+        }
       }
-    }
+    };
+
+    postUser();
   }, [users]);
 
   return (

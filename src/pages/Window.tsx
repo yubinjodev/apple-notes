@@ -4,7 +4,7 @@ import Searchbar from "../components/Searchbar";
 import Sidebar from "../components/Sidebar";
 import WindowControl from "../components/WindowControl";
 
-import { logout } from "../actions";
+import { clearNotes, logout } from "../actions";
 import { RootState } from "../types/store";
 
 export default function Window() {
@@ -13,6 +13,7 @@ export default function Window() {
 
   const handleClickLogOut = () => {
     dispatch(logout());
+    dispatch(clearNotes());
   };
 
   return (

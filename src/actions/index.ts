@@ -27,3 +27,9 @@ export const saveNote = (note: any) => {
     payload: note,
   };
 };
+
+export const clearNotes = () => {
+  return {
+    type: "CLEAR_NOTES",
+  };
+};
