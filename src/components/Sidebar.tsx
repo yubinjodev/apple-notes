@@ -1,7 +1,7 @@
-import { useNotes } from "../hooks/useNotes";
+import { useFetchNotes } from "../hooks/useFetchNotes";
 
 export default function Sidebar() {
-  const { notes } = useNotes();
+  // const { notes } = useFetchNotes();
 
   // console.log(notes);
 

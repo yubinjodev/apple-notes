@@ -2,10 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 import { useDispatch } from "react-redux";
-import { login } from "../actions";
+import { importNotes, login } from "../actions";
 
 import { SignUpFormProps } from "../types/user";
 import { BASEURL, GET_CONFIG, POST_CONFIG } from "../utils/api";
+import { useFetchNotes } from "../hooks/useFetchNotes";
 
 export default function SignUpForm(props: SignUpFormProps) {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ export default function SignUpForm(props: SignUpFormProps) {
   const [pw, setPw] = useState<string>("");
   const [users, setUsers] = useState<any>(null);
   const [error, setError] = useState<string>("");
+  const { notes } = useFetchNotes();
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -119,7 +121,9 @@ export default function SignUpForm(props: SignUpFormProps) {
         GET_CONFIG
       );
       const data = await response.data.record;
-      await insertUserToNotesTable(data);
+      if (data) {
+        insertUserToNotesTable(data);
+      }
     } catch (e) {
       console.error(e);
     }
