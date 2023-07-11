@@ -1,14 +1,23 @@
+import { useEffect } from "react";
 import { useFetchNotes } from "../hooks/useFetchNotes";
+import { useDispatch, useSelector } from "react-redux";
+import { importNotes } from "../actions";
+import { RootState } from "../types/store";
 
 export default function Sidebar() {
-  // const { notes } = useFetchNotes();
+  const { notes } = useFetchNotes();
+  const dispatch = useDispatch();
+  const userState = useSelector((state: RootState) => state.userReducer);
 
-  // console.log(notes);
+  useEffect(() => {
+    if (userState) {
+      console.log("NOTES", notes);
+      dispatch(importNotes(notes));
+    }
+  });
 
   return (
     <aside className="sidebar-root">
-      {process.env.REACT_APP_BASEURL}
-
       {/* {parsedNotes &&
         parsedNotes.map((note: any, idx: any) => (
           <SidebarPreview key={idx} date={note.date} details={note.details} />
