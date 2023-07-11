@@ -28,7 +28,6 @@ export default function SignUpForm(props: SignUpFormProps) {
   };
 
   const fetchUsers = async () => {
-    console.log("2 fetch users");
     try {
       const response = await axios.get(
         BASEURL + process.env.REACT_APP_USER_BIN_ID,
@@ -47,7 +46,6 @@ export default function SignUpForm(props: SignUpFormProps) {
   };
 
   const addUser = () => {
-    console.log("3 add user", { email, pw });
     setUsers((prev: any) => ({
       ...prev,
       [email]: pw,
@@ -55,13 +53,10 @@ export default function SignUpForm(props: SignUpFormProps) {
   };
 
   const signUp = () => {
-    console.log("1 sign up clicked");
     fetchUsers();
   };
 
   const infoValidation = (userData: object) => {
-    console.log("info validation", userData);
-
     const emailChecker = () => {
       let flag = 0;
       for (const emailData in userData) {
@@ -140,8 +135,6 @@ export default function SignUpForm(props: SignUpFormProps) {
   }, [error]);
 
   useEffect(() => {
-    console.log("users state:", users);
-
     const postUser = async () => {
       if (error === "none" && users) {
         try {
@@ -151,7 +144,6 @@ export default function SignUpForm(props: SignUpFormProps) {
             POST_CONFIG
           );
           const status = await response.status;
-          console.log(status);
           if (status === 200) {
             alert("Sign Up Successful.");
             dispatch(login({ email, pw }));

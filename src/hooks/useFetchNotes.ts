@@ -11,18 +11,15 @@ export const useFetchNotes = () => {
   const dispatch = useDispatch();
 
   const filterNotes = (data: any) => {
-    console.log("filtering notes");
     const currentUserEmail = userState.email;
 
     for (const email in data) {
       if (email === currentUserEmail) {
-        console.log("setting notes");
         setNotes(data[email]);
       }
     }
   };
   useEffect(() => {
-    console.log("useFetchNotes started. userState:", userState);
     const fetchNotes = async () => {
       try {
         const response = await axios.get(
@@ -40,15 +37,9 @@ export const useFetchNotes = () => {
     };
 
     if (userState) {
-      console.log("user detected");
       fetchNotes();
     }
   }, [userState]);
-
-  //   useEffect(() => {
-  //     console.log("change in notes detected");
-  //     dispatch(importNotes(notes));
-  //   }, [notes]);
 
   return { notes };
 };

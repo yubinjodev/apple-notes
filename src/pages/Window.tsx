@@ -14,6 +14,7 @@ export default function Window() {
   const handleClickLogOut = () => {
     dispatch(logout());
     dispatch(clearNotes());
+    window.location.reload();
   };
 
   return (
