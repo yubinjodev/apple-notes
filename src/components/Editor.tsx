@@ -1,10 +1,8 @@
-import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../types/store";
-import { BASEURL, GET_CONFIG } from "../utils/api";
-import EditorMenu from "./EditorMenu";
 import { useFetchNotes } from "../hooks/useFetchNotes";
+import { RootState } from "../types/store";
+import EditorMenu from "./EditorMenu";
 
 export default function Editor() {
   const [note, setNote] = useState<any>(null);
