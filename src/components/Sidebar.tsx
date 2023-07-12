@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-import { useFetchNotes } from "../hooks/useFetchNotes";
 import { useDispatch, useSelector } from "react-redux";
-import { importNotes } from "../actions";
+import { useFetchNotes } from "../hooks/useFetchNotes";
 import { RootState } from "../types/store";
 import SidebarPreview from "./SidebarPreview";
+import { importNotes } from "../actions";
 
 export default function Sidebar() {
   const { notes } = useFetchNotes();
   const dispatch = useDispatch();
-  const userState = useSelector((state: RootState) => state.userReducer);
-  const notesState = useSelector((state: RootState) => state.notesReducer);
   const [parsedNotes, setParsedNotes] = useState<any>([]);
 
-  const notesParser = () => {
+  const notesParser = (notesState: any) => {
     for (const date in notesState) {
       setParsedNotes((prev: any) => [
         ...prev,
@@ -25,25 +23,28 @@ export default function Sidebar() {
   };
 
   useEffect(() => {
-    if (notesState) {
-      notesParser();
+    if (notes) {
+      const notesState = dispatch(importNotes(notes));
+      if (notesState) {
+        notesParser(notesState);
+      }
     }
-  }, [notesState]);
+  }, [notes]);
 
-  useEffect(() => {
-    dispatch(importNotes(notes));
-  }, [userState]);
+  // useEffect(() => {
+  //   console.log(parsedNotes);
+  // }, [parsedNotes]);
 
   return (
     <aside className="sidebar-root">
-      {parsedNotes &&
+      {/* {parsedNotes &&
         parsedNotes.map((note: any) => (
           <SidebarPreview
             key={note.date + note.details}
             date={note.date}
             details={note.details}
           />
-        ))}
+        ))} */}
     </aside>
   );
 }

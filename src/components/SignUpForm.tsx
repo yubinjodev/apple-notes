@@ -17,7 +17,6 @@ export default function SignUpForm(props: SignUpFormProps) {
   const [pw, setPw] = useState<string>("");
   const [users, setUsers] = useState<any>(null);
   const [error, setError] = useState<string>("");
-  const { notes } = useFetchNotes();
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -92,13 +91,23 @@ export default function SignUpForm(props: SignUpFormProps) {
     }
   };
 
-  const saveNewNotesTableWithNewUser = (data: any) => {
+  const saveNewNotesTableWithNewUser = async (data: any) => {
     try {
-      axios.put(
+      const response = await axios.put(
         BASEURL + process.env.REACT_APP_NOTES_BIN_ID,
         data,
         POST_CONFIG
       );
+      const status = response.status;
+      if (status === 200) {
+        console.log("1 user added to the notes table");
+        const dispatchRes = dispatch(login({ email, pw }));
+
+        if (dispatchRes) {
+          alert("Sign Up Successful.");
+          console.log("2 dispatched login, userState true");
+        }
+      }
     } catch (e) {
       console.error(e);
     }
@@ -145,9 +154,13 @@ export default function SignUpForm(props: SignUpFormProps) {
           );
           const status = await response.status;
           if (status === 200) {
-            alert("Sign Up Successful.");
-            dispatch(login({ email, pw }));
+            console.log("please wait.");
             addUserToNotesTable();
+            // alert("Sign Up Successful.");
+            // const dispatchRes = dispatch(login({ email, pw }));
+            // if (dispatchRes) {
+            //   addUserToNotesTable();
+            // }
           }
         } catch (e) {
           console.error(e);
