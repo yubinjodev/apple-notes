@@ -11,13 +11,13 @@ export const useFetchNotes = () => {
   const dispatch = useDispatch();
 
   const filterNotes = (data: any) => {
-    console.log("filternotes start");
+    // console.log("filternotes start");
     const currentUserEmail = userState.email;
 
     for (const email in data) {
-      console.log(email, currentUserEmail);
+      // console.log(email, currentUserEmail);
       if (email === currentUserEmail) {
-        console.log("found match");
+        // console.log("found match");
         setNotes(data[email]);
       }
     }
@@ -30,7 +30,7 @@ export const useFetchNotes = () => {
 
   useEffect(() => {
     const fetchNotes = async () => {
-      console.log("fetchNotes start");
+      // console.log("fetchNotes start");
       try {
         const response = await axios.get(
           BASEURL + process.env.REACT_APP_NOTES_BIN_ID,
@@ -46,9 +46,9 @@ export const useFetchNotes = () => {
       }
     };
 
-    console.log("userstate change detected");
+    // console.log("userstate change detected");
     if (userState) {
-      console.log("user detected");
+      // console.log("user detected");
       fetchNotes();
     }
   }, [userState]);

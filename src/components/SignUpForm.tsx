@@ -100,12 +100,12 @@ export default function SignUpForm(props: SignUpFormProps) {
       );
       const status = response.status;
       if (status === 200) {
-        console.log("1 user added to the notes table");
+        // console.log("1 user added to the notes table");
         const dispatchRes = dispatch(login({ email, pw }));
 
         if (dispatchRes) {
           alert("Sign Up Successful.");
-          console.log("2 dispatched login, userState true");
+          // console.log("2 dispatched login, userState true");
         }
       }
     } catch (e) {
