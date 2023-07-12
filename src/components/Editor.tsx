@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
-import { Note, Notes } from "../types/notes";
-import { useDispatch, useSelector } from "react-redux";
-import { saveNote } from "../actions";
 import axios from "axios";
-import { POST_CONFIG, BASEURL } from "../utils/api";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../types/store";
+import { BASEURL, GET_CONFIG } from "../utils/api";
 import EditorMenu from "./EditorMenu";
+import { useFetchNotes } from "../hooks/useFetchNotes";
 
 export default function Editor() {
   const [note, setNote] = useState<any>(null);
   const dispatch = useDispatch();
   const notesReducer = useSelector((state: RootState) => state?.notesReducer);
   const [openMenu, setOpenMenu] = useState(false);
+  const { notes } = useFetchNotes();
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNote((prev: any) => ({
@@ -21,36 +21,21 @@ export default function Editor() {
     }));
   };
 
-  const postNote = () => {
-    // try {
-    //   axios.put(
-    //     "https://api.jsonbin.io/v3/b/649be4b29d312622a3771749",
-    //     notesReducer,
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         "X-Master-Key": process.env.REACT_APP_X_MASTER_KEY,
-    //         "X-Access-Key": process.env.REACT_APP_X_ACCESS_KEY,
-    //       },
-    //     }
-    //   );
-    //   alert("Saved");
-    // } catch (e) {
-    //   console.error(e);
-    // }
+  const postNote = async (notes: any) => {};
+
+  const fetchNotes = () => {
+    if (note) {
+      notes[note.date] = note.details;
+      postNote(notes);
+    }
   };
 
-  const handleClickSaveNote = () => {
-    if (note) {
-      const noteObj = { [note.date.toString()]: note.details.toString() };
-      dispatch(saveNote(noteObj));
-      postNote();
-    }
+  const handleClickSave = async () => {
+    fetchNotes();
   };
 
   return (
     <main className="editor-root position-relative container-fluid full-height">
-      {/* <button onClick={handleClickSaveNote}>save</button> */}
       <button
         className="editor-menu border border-warning rounded-circle d-flex align-items-center justify-content-center position-absolute top-0 end-0 bg-transparent"
         style={{ height: 24, width: 24 }}
@@ -58,7 +43,7 @@ export default function Editor() {
       >
         <i className="bi bi-three-dots text-warning fs-5"></i>
       </button>
-      {openMenu && <EditorMenu />}
+      {openMenu && <EditorMenu handleClickSave={handleClickSave} />}
 
       <textarea
         className="editor-root form-control py-5"

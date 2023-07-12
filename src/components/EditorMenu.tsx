@@ -1,4 +1,9 @@
-export default function EditorMenu() {
+type EditorMenuProps = {
+  handleClickSave: () => void;
+};
+
+export default function EditorMenu(props: EditorMenuProps) {
+  const { handleClickSave } = props;
   return (
     <div
       className="editormenu-root container bg-transparent p-2 rounded position-absolute top-0 end-0 my-4"
@@ -7,6 +12,7 @@ export default function EditorMenu() {
       <div
         className=" container d-flex flex-row justify-content-between align-items-center"
         style={{ cursor: "pointer" }}
+        onClick={handleClickSave}
       >
         <div>Save</div>
         <i
