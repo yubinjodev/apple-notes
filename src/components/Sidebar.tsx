@@ -14,7 +14,7 @@ export default function Sidebar() {
     // console.log(notesState.payload);
     if (parsedNotes) {
       for (const date in notesState.payload) {
-        console.log(parsedNotes);
+        // console.log(parsedNotes);
         if (!parsedNotes.map((note: any) => note.date).includes(date)) {
           setParsedNotes((prev: any) => [
             ...prev,
