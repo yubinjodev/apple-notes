@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useFetchNotes } from "../hooks/useFetchNotes";
 import { RootState } from "../types/store";
 import SidebarPreview from "./SidebarPreview";
 import { importNotes } from "../actions";
+import { useUserNotes } from "../hooks/useUserNotes";
 
 export default function Sidebar() {
-  const { notes } = useFetchNotes();
+  const { userNotes } = useUserNotes();
   const dispatch = useDispatch();
   const [parsedNotes, setParsedNotes] = useState<any>([]);
 
@@ -39,13 +39,13 @@ export default function Sidebar() {
   };
 
   useEffect(() => {
-    if (notes) {
-      const notesState = dispatch(importNotes(notes));
+    if (userNotes) {
+      const notesState = dispatch(importNotes(userNotes));
       if (notesState) {
         notesParser(notesState);
       }
     }
-  }, [notes]);
+  }, [userNotes]);
 
   useEffect(() => {
     // console.log(parsedNotes);

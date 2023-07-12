@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useFetchNotes } from "../hooks/useFetchNotes";
+import { useUserNotes } from "../hooks/useUserNotes";
 import { RootState } from "../types/store";
 import EditorMenu from "./EditorMenu";
 
@@ -9,7 +9,7 @@ export default function Editor() {
   const dispatch = useDispatch();
   const notesReducer = useSelector((state: RootState) => state?.notesReducer);
   const [openMenu, setOpenMenu] = useState(false);
-  const { notes } = useFetchNotes();
+  const { userNotes } = useUserNotes();
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNote((prev: any) => ({
