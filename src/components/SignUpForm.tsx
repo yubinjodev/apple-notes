@@ -17,6 +17,7 @@ export default function SignUpForm(props: SignUpFormProps) {
   const [pw, setPw] = useState<string>("");
   const [users, setUsers] = useState<any>(null);
   const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState(false);
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -52,6 +53,7 @@ export default function SignUpForm(props: SignUpFormProps) {
   };
 
   const signUp = () => {
+    setLoading(true);
     fetchUsers();
   };
 
@@ -72,6 +74,7 @@ export default function SignUpForm(props: SignUpFormProps) {
     for (const emailData in userData) {
       if (emailData === email) {
         setError("An account with that email already exists.");
+        setLoading(false);
       }
       if (pw.length <= 4 && !flag) {
         setError("none");
@@ -80,6 +83,7 @@ export default function SignUpForm(props: SignUpFormProps) {
 
     if (pw.length < 4) {
       setError("Your password should be at least 4 characters long.");
+      setLoading(false);
     }
   };
 
@@ -104,7 +108,8 @@ export default function SignUpForm(props: SignUpFormProps) {
         const dispatchRes = dispatch(login({ email, pw }));
 
         if (dispatchRes) {
-          alert("Sign Up Successful.");
+          setLoading(false);
+          // alert("Sign Up Successful.");
           // console.log("2 dispatched login, userState true");
         }
       }
@@ -174,6 +179,14 @@ export default function SignUpForm(props: SignUpFormProps) {
   return (
     <>
       <h1 className="display-3 text-center mb-5">Apple Notes</h1>
+
+      {/* <div
+        className="spinner-border spinner-border-sm text-light"
+        role="status"
+      >
+        <span className="sr-only"></span>
+      </div> */}
+
       <form
         className="loginform-root container-sm form-container"
         onSubmit={handleClickSignUp}
@@ -201,7 +214,15 @@ export default function SignUpForm(props: SignUpFormProps) {
 
         <div className="row mb-3">
           <button className="btn bg-transparent" type="submit">
-            Sign Up
+            {!loading && "Sign Up"}
+            {loading && (
+              <div
+                className="spinner-border spinner-border-sm text-light"
+                role="status"
+              >
+                <span className="sr-only"></span>
+              </div>
+            )}
           </button>
         </div>
 
