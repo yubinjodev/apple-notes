@@ -19,17 +19,8 @@ export default function Editor() {
     }));
   };
 
-  const postNote = async (notes: any) => {};
-
-  const fetchNotes = () => {
-    if (note) {
-      notes[note.date] = note.details;
-      postNote(notes);
-    }
-  };
-
   const handleClickSave = async () => {
-    fetchNotes();
+    // const
   };
 
   return (
