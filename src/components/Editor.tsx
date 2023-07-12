@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useUserNotes } from "../hooks/useUserNotes";
-import { RootState } from "../types/store";
 import EditorMenu from "./EditorMenu";
+import { addNoteToNotesTable, fetchNotes } from "../service/apiService";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../types/store";
+import { importNotes } from "../actions";
+import { useUserNotes } from "../hooks/useUserNotes";
 
 export default function Editor() {
   const [note, setNote] = useState<any>(null);
-  const dispatch = useDispatch();
-  const notesReducer = useSelector((state: RootState) => state?.notesReducer);
   const [openMenu, setOpenMenu] = useState(false);
+  const userState = useSelector((state: RootState) => state.userReducer);
+  const dispatch = useDispatch();
   const { userNotes } = useUserNotes();
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -20,7 +22,13 @@ export default function Editor() {
   };
 
   const handleClickSave = async () => {
-    // const
+    const response = await addNoteToNotesTable(note, userState);
+    if (response && userNotes) {
+      alert("Note saved.");
+      setOpenMenu(false);
+      window.location.reload();
+      // dispatch(importNotes(userNotes));
+    }
   };
 
   return (

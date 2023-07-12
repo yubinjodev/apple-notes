@@ -9,6 +9,7 @@ export default function Sidebar() {
   const { userNotes } = useUserNotes();
   const dispatch = useDispatch();
   const [parsedNotes, setParsedNotes] = useState<any>([]);
+  const notesReducer = useSelector((state: RootState) => state.notesReducer);
 
   const notesParser = (notesState: any) => {
     // console.log(notesState.payload);
