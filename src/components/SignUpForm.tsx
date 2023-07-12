@@ -1,198 +1,28 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import React from "react";
+import { useSignUpForm } from "../hooks/useSignUpForm";
 
-import { useDispatch } from "react-redux";
-import { importNotes, login } from "../actions";
-
-import { SignUpFormProps } from "../types/user";
-import { BASEURL, GET_CONFIG, POST_CONFIG } from "../utils/api";
-import { useFetchNotes } from "../hooks/useFetchNotes";
-
-export default function SignUpForm(props: SignUpFormProps) {
-  const dispatch = useDispatch();
-
-  const { openSignInForm } = props;
-
-  const [email, setEmail] = useState<string>("");
-  const [pw, setPw] = useState<string>("");
-  const [users, setUsers] = useState<any>(null);
-  const [error, setError] = useState<string>("");
-  const [loading, setLoading] = useState(false);
-
-  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handleChangePw = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPw(e.target.value);
-  };
-
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get(
-        BASEURL + process.env.REACT_APP_USER_BIN_ID,
-        GET_CONFIG
-      );
-      const userData = await response.data.record;
-
-      if (userData) {
-        setUsers(userData);
-
-        infoValidation(userData);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const addUser = () => {
-    setUsers((prev: any) => ({
-      ...prev,
-      [email]: pw,
-    }));
-  };
-
-  const signUp = () => {
-    setLoading(true);
-    fetchUsers();
-  };
-
-  const infoValidation = (userData: object) => {
-    const emailChecker = () => {
-      let flag = 0;
-      for (const emailData in userData) {
-        if (emailData === email) {
-          flag = 1;
-        }
-      }
-
-      return flag;
-    };
-
-    const flag = emailChecker();
-
-    for (const emailData in userData) {
-      if (emailData === email) {
-        setError("An account with that email already exists.");
-        setLoading(false);
-      }
-      if (pw.length <= 4 && !flag) {
-        setError("none");
-      }
-    }
-
-    if (pw.length < 4) {
-      setError("Your password should be at least 4 characters long.");
-      setLoading(false);
-    }
-  };
-
-  const handleClickSignUp = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (email && pw) {
-      signUp();
-    }
-  };
-
-  const saveNewNotesTableWithNewUser = async (data: any) => {
-    try {
-      const response = await axios.put(
-        BASEURL + process.env.REACT_APP_NOTES_BIN_ID,
-        data,
-        POST_CONFIG
-      );
-      const status = response.status;
-      if (status === 200) {
-        // console.log("1 user added to the notes table");
-        const dispatchRes = dispatch(login({ email, pw }));
-
-        if (dispatchRes) {
-          setLoading(false);
-          // alert("Sign Up Successful.");
-          // console.log("2 dispatched login, userState true");
-        }
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const insertUserToNotesTable = (data: any) => {
-    data[email] = {};
-    saveNewNotesTableWithNewUser(data);
-  };
-
-  const fetchNotes = async () => {
-    try {
-      const response = await axios.get(
-        BASEURL + process.env.REACT_APP_NOTES_BIN_ID,
-        GET_CONFIG
-      );
-      const data = await response.data.record;
-      if (data) {
-        insertUserToNotesTable(data);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const addUserToNotesTable = () => {
-    fetchNotes();
-  };
-
-  useEffect(() => {
-    if (error === "none") {
-      addUser();
-    }
-  }, [error]);
-
-  useEffect(() => {
-    const postUser = async () => {
-      if (error === "none" && users) {
-        try {
-          const response = await axios.put(
-            BASEURL + process.env.REACT_APP_USER_BIN_ID,
-            users,
-            POST_CONFIG
-          );
-          const status = await response.status;
-          if (status === 200) {
-            console.log("please wait.");
-            addUserToNotesTable();
-            // alert("Sign Up Successful.");
-            // const dispatchRes = dispatch(login({ email, pw }));
-            // if (dispatchRes) {
-            //   addUserToNotesTable();
-            // }
-          }
-        } catch (e) {
-          console.error(e);
-        }
-      }
-    };
-
-    postUser();
-  }, [users]);
+export default function SignUpForm(props: any) {
+  const {
+    email,
+    pw,
+    error,
+    loading,
+    handleChangeEmail,
+    handleChangePw,
+    handleClickSignUp,
+    openSignInForm,
+  } = useSignUpForm(props);
 
   return (
     <>
       <h1 className="display-3 text-center mb-5">Apple Notes</h1>
-
-      {/* <div
-        className="spinner-border spinner-border-sm text-light"
-        role="status"
-      >
-        <span className="sr-only"></span>
-      </div> */}
 
       <form
         className="loginform-root container-sm form-container"
         onSubmit={handleClickSignUp}
       >
         <div className="row">
-          <p className="text-danger text-center">{error !== "none" && error}</p>
+          <p className="text-danger text-center">{error}</p>
           <input
             value={email}
             className="form-control"
@@ -214,8 +44,9 @@ export default function SignUpForm(props: SignUpFormProps) {
 
         <div className="row mb-3">
           <button className="btn bg-transparent" type="submit">
-            {!loading && "Sign Up"}
-            {loading && (
+            {!loading ? (
+              "Sign Up"
+            ) : (
               <div
                 className="spinner-border spinner-border-sm text-light"
                 role="status"

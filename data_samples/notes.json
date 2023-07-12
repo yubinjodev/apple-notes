@@ -1,0 +1,14 @@
+{
+    "email@email.com": {
+      "2023-09-09": "@email.comhello world",
+      "2023-09-10": "@email.comhello world2",
+      "2023-09-11": "@email.comhello world3",
+      "2023-09-12": "@email.comhello world4"
+    },
+    "email@gmail.com": {
+      "2023-09-09": "email@gmail.comhello world",
+      "2023-09-10": "email@gmail.comhello world2",
+      "2023-09-11": "email@gmail.comemail@gmail.comhello world3",
+      "2023-09-12": "email@gmail.comhello world4"
+    }
+  }
