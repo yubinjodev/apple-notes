@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../types/store";
-import SidebarPreview from "./SidebarPreview";
 import { importNotes } from "../actions";
 import { useUserNotes } from "../hooks/useUserNotes";
+import { RootState } from "../types/store";
+import SidebarPreview from "./SidebarPreview";
 
 export default function Sidebar() {
   const { userNotes } = useUserNotes();

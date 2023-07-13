@@ -1,16 +1,14 @@
 import { useState } from "react";
-import EditorMenu from "./EditorMenu";
-import { addNoteToNotesTable, fetchNotes } from "../service/apiService";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../types/store";
-import { importNotes } from "../actions";
+import { useSelector } from "react-redux";
 import { useUserNotes } from "../hooks/useUserNotes";
+import { addNoteToNotesTable } from "../service/apiService";
+import { RootState } from "../types/store";
+import EditorMenu from "./EditorMenu";
 
 export default function Editor() {
-  const [note, setNote] = useState<any>(null);
+  const [note, setNote] = useState<any>("");
   const [openMenu, setOpenMenu] = useState(false);
   const userState = useSelector((state: RootState) => state.userReducer);
-  const dispatch = useDispatch();
   const { userNotes } = useUserNotes();
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -27,7 +25,6 @@ export default function Editor() {
       alert("Note saved.");
       setOpenMenu(false);
       window.location.reload();
-      // dispatch(importNotes(userNotes));
     }
   };
 
@@ -43,6 +40,7 @@ export default function Editor() {
       {openMenu && <EditorMenu handleClickSave={handleClickSave} />}
 
       <textarea
+        value={note.details}
         className="editor-root form-control py-5"
         onChange={handleChangeInput}
       />

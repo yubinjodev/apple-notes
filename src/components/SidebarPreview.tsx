@@ -7,7 +7,10 @@ export default function SidebarPreview(props: SidebarPreviewProps) {
   const { date, details } = props;
 
   return (
-    <section className="sidebarpreview-root container">
+    <section
+      className="sidebarpreview-root container"
+      style={{ cursor: "pointer" }}
+    >
       <div className="row fs-5">
         <div className="col text-truncate">{details}</div>
       </div>
