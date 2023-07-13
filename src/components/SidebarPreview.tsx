@@ -1,3 +1,6 @@
+import { useDispatch } from "react-redux";
+import { selectNote } from "../actions";
+
 type SidebarPreviewProps = {
   date: Date;
   details: string;
@@ -5,11 +8,17 @@ type SidebarPreviewProps = {
 
 export default function SidebarPreview(props: SidebarPreviewProps) {
   const { date, details } = props;
+  const dispatch = useDispatch();
+
+  const handleClickPreview = () => {
+    dispatch(selectNote({ date, details }));
+  };
 
   return (
     <section
       className="sidebarpreview-root container"
       style={{ cursor: "pointer" }}
+      onClick={handleClickPreview}
     >
       <div className="row fs-5">
         <div className="col text-truncate">{details}</div>

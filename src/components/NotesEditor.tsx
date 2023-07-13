@@ -3,6 +3,7 @@ import Editor from "./Editor";
 import { useSelector } from "react-redux";
 import { RootState } from "../types/store";
 import Authentication from "./Authentication";
+import { Dispatch } from "react";
 
 export default function NotesEditor() {
   const userState = useSelector((state: RootState) => state.userReducer);

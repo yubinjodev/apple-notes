@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useUserNotes } from "../hooks/useUserNotes";
 import { addNoteToNotesTable } from "../service/apiService";
@@ -10,6 +10,7 @@ export default function Editor() {
   const [openMenu, setOpenMenu] = useState(false);
   const userState = useSelector((state: RootState) => state.userReducer);
   const { userNotes } = useUserNotes();
+  const editorReducer = useSelector((state: RootState) => state.editorReducer);
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNote((prev: any) => ({
@@ -27,6 +28,14 @@ export default function Editor() {
       window.location.reload();
     }
   };
+
+  useEffect(() => {
+    setNote((prev: any) => ({
+      ...prev,
+      date: editorReducer.date,
+      details: editorReducer.details,
+    }));
+  }, [editorReducer]);
 
   return (
     <main className="editor-root position-relative container-fluid full-height">

@@ -33,3 +33,10 @@ export const clearNotes = () => {
     type: "CLEAR_NOTES",
   };
 };
+
+export const selectNote = (note: any) => {
+  return {
+    type: "SELECT_NOTE",
+    payload: note,
+  };
+};
