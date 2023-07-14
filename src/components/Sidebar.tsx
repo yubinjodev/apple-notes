@@ -13,15 +13,12 @@ export default function Sidebar() {
   const notesReducer = useSelector((state: RootState) => state.notesReducer);
 
   const notesParser = (notesState: Action) => {
-    // console.log(notesState.payload);
     if (parsedNotes) {
       for (const date in notesState.payload) {
-        // console.log(parsedNotes);
-        if (
-          !parsedNotes
-            .map((note) => (note as NoteNode)?.date)
-            .includes(new Date(date))
-        ) {
+        const exists = parsedNotes.some(
+          (note) => (note as NoteNode)?.date?.toString() === date
+        );
+        if (!exists) {
           setParsedNotes((prev: Note[]) => [
             ...prev,
             {
@@ -31,16 +28,14 @@ export default function Sidebar() {
           ]);
         }
       }
-    } else if (!parsedNotes) {
-      for (const date in notesState.payload) {
-        setParsedNotes((prev: Note[]) => [
-          ...prev,
-          {
-            date: new Date(date),
-            details: notesState.payload[date],
-          },
-        ]);
-      }
+    } else {
+      const newParsedNotes = Object.entries(notesState.payload).map(
+        ([date, details]) => ({
+          date: new Date(date),
+          details: details as string,
+        })
+      );
+      setParsedNotes(newParsedNotes);
     }
   };
 
