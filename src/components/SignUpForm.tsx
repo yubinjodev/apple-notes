@@ -1,7 +1,8 @@
 import React from "react";
 import { useSignUpForm } from "../hooks/useSignUpForm";
+import { SignUpFormProps } from "../types/user";
 
-export default function SignUpForm(props: any) {
+export default function SignUpForm(props: SignUpFormProps) {
   const {
     email,
     pw,

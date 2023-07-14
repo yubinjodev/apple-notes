@@ -2,25 +2,30 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { importNotes } from "../actions";
 import { useUserNotes } from "../hooks/useUserNotes";
-import { RootState } from "../types/store";
+import { Action, RootState } from "../types/store";
 import SidebarPreview from "./SidebarPreview";
+import { Note, NoteNode } from "../types/notes";
 
 export default function Sidebar() {
   const { userNotes } = useUserNotes();
   const dispatch = useDispatch();
-  const [parsedNotes, setParsedNotes] = useState<any>([]);
+  const [parsedNotes, setParsedNotes] = useState<Note[]>([]);
   const notesReducer = useSelector((state: RootState) => state.notesReducer);
 
-  const notesParser = (notesState: any) => {
+  const notesParser = (notesState: Action) => {
     // console.log(notesState.payload);
     if (parsedNotes) {
       for (const date in notesState.payload) {
         // console.log(parsedNotes);
-        if (!parsedNotes.map((note: any) => note.date).includes(date)) {
-          setParsedNotes((prev: any) => [
+        if (
+          !parsedNotes
+            .map((note) => (note as NoteNode)?.date)
+            .includes(new Date(date))
+        ) {
+          setParsedNotes((prev: Note[]) => [
             ...prev,
             {
-              date: date,
+              date: new Date(date),
               details: notesState.payload[date],
             },
           ]);
@@ -28,10 +33,10 @@ export default function Sidebar() {
       }
     } else if (!parsedNotes) {
       for (const date in notesState.payload) {
-        setParsedNotes((prev: any) => [
+        setParsedNotes((prev: Note[]) => [
           ...prev,
           {
-            date: date,
+            date: new Date(date),
             details: notesState.payload[date],
           },
         ]);
@@ -55,15 +60,18 @@ export default function Sidebar() {
   return (
     <aside className="sidebar-root">
       {parsedNotes &&
-        parsedNotes.map((note: any) => (
-          <SidebarPreview
-            key={note.date + note.details}
-            date={note.date}
-            details={note.details}
-          />
-        ))}
+        parsedNotes.map((note) => {
+          if (note && note.date && note.details) {
+            return (
+              <SidebarPreview
+                key={note.date + note.details}
+                date={note.date}
+                details={note.details}
+              />
+            );
+          }
+          return null;
+        })}
     </aside>
   );
 }
-
-// TODO: notes keep getting added upon refresh

@@ -5,17 +5,17 @@ import Searchbar from "../components/Searchbar";
 import Sidebar from "../components/Sidebar";
 import WindowControl from "../components/WindowControl";
 
-import { clearNotes, logout, selectNote } from "../actions";
+import { clearEditor, clearNotes, logout } from "../actions";
 import { RootState } from "../types/store";
 
 export default function Window() {
-  const [selectedNote, setSelectedNote] = useState<any>(null);
   const dispatch = useDispatch();
   const userState = useSelector((state: RootState) => state.userReducer);
 
   const handleClickLogOut = () => {
     dispatch(logout());
     dispatch(clearNotes());
+    dispatch(clearEditor());
     window.location.reload();
   };
 

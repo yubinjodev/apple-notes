@@ -6,19 +6,20 @@ import {
   addUserToUsersTable,
   fetchUsers,
 } from "../service/apiService";
+import { SignUpFormProps } from "../types/user";
 
-export const useSignUpForm = ({ openSignInForm }: any) => {
+export const useSignUpForm = ({ openSignInForm }: SignUpFormProps) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleChangeEmail = (e: any) => {
+  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
-  const handleChangePw = (e: any) => {
+  const handleChangePw = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPw(e.target.value);
   };
 
@@ -53,7 +54,7 @@ export const useSignUpForm = ({ openSignInForm }: any) => {
     }
   };
 
-  const handleClickSignUp = (e: any) => {
+  const handleClickSignUp = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (email && pw) {

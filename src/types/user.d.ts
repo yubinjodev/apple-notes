@@ -1,11 +1,11 @@
-import { Note } from "./notes";
-
 export type User = {
   email: string;
   pw: string;
 } | null;
 
-export type Users = User[] | null;
+export type DBUser = {
+  [key: string]: string;
+};
 
 export type LoginFormProps = {
   openSignUpForm: () => void;

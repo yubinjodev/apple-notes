@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { fetchNotes } from "../service/apiService";
 import { RootState } from "../types/store";
+import { DBNote, DBNotes } from "../types/notes";
 
 export const useUserNotes = () => {
-  const [userNotes, setUserNotes] = useState<any>(null);
+  const [userNotes, setUserNotes] = useState<DBNote>(null);
   const userState = useSelector((state: RootState) => state.userReducer);
 
   useEffect(() => {
-    const filterNotes = (notesData: any) => {
+    const filterNotes = (notesData: DBNotes) => {
       const currentUserEmail = userState.email;
       const currentUserNotes = notesData[currentUserEmail] || {};
 

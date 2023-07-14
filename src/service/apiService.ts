@@ -1,5 +1,7 @@
 import axios from "axios";
 import { BASEURL, GET_CONFIG, POST_CONFIG } from "../utils/api";
+import { User } from "../types/user";
+import { Note } from "../types/notes";
 
 export const fetchUsers = async () => {
   try {
@@ -27,9 +29,9 @@ export const fetchNotes = async () => {
   }
 };
 
-export const addUserToUsersTable = async (user: any) => {
+export const addUserToUsersTable = async (user: User) => {
   const users = await fetchUsers();
-  if (users) {
+  if (users && user) {
     users[user.email] = user.pw;
 
     try {
@@ -65,10 +67,10 @@ export const addUserToNotesTable = async (email: string) => {
   }
 };
 
-export const addNoteToNotesTable = async (note: any, user: any) => {
+export const addNoteToNotesTable = async (note: Note, user: User) => {
   const notes = await fetchNotes();
-  if (notes) {
-    notes[user.email][note.date] = note.details;
+  if (notes && user && note) {
+    notes[user.email][note.date.toString()] = note.details;
 
     try {
       const response = await axios.put(

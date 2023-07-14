@@ -4,16 +4,17 @@ import { useUserNotes } from "../hooks/useUserNotes";
 import { addNoteToNotesTable } from "../service/apiService";
 import { RootState } from "../types/store";
 import EditorMenu from "./EditorMenu";
+import { Note } from "../types/notes";
 
 export default function Editor() {
-  const [note, setNote] = useState<any>("");
+  const [note, setNote] = useState<Note>("");
   const [openMenu, setOpenMenu] = useState(false);
   const userState = useSelector((state: RootState) => state.userReducer);
   const { userNotes } = useUserNotes();
   const editorReducer = useSelector((state: RootState) => state.editorReducer);
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setNote((prev: any) => ({
+    setNote((prev: Note) => ({
       ...prev,
       date: new Date(),
       details: e.target.value,
@@ -30,7 +31,7 @@ export default function Editor() {
   };
 
   useEffect(() => {
-    setNote((prev: any) => ({
+    setNote((prev: Note) => ({
       ...prev,
       date: editorReducer.date,
       details: editorReducer.details,
@@ -48,11 +49,13 @@ export default function Editor() {
       </button>
       {openMenu && <EditorMenu handleClickSave={handleClickSave} />}
 
-      <textarea
-        value={note.details}
-        className="editor-root form-control py-5"
-        onChange={handleChangeInput}
-      />
+      {note && (
+        <textarea
+          value={note.details}
+          className="editor-root form-control py-5"
+          onChange={handleChangeInput}
+        />
+      )}
     </main>
   );
 }
