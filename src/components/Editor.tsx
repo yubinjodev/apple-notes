@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useUserNotes } from "../hooks/useUserNotes";
-import { addNoteToNotesTable } from "../service/apiService";
+import { addNoteToNotesTable, deleteNote } from "../service/apiService";
 import { RootState } from "../types/store";
 import EditorMenu from "./EditorMenu";
 import { Note } from "../types/notes";
+import { User } from "../types/user";
+import { clearEditor } from "../actions";
 
 export default function Editor() {
   const [note, setNote] = useState<Note>("");
   const [openMenu, setOpenMenu] = useState(false);
   const userState = useSelector((state: RootState) => state.userReducer);
   const { userNotes } = useUserNotes();
-  const editorReducer = useSelector((state: RootState) => state.editorReducer);
+  const editorState = useSelector((state: RootState) => state.editorReducer);
+  const dispatch = useDispatch();
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNote((prev: Note) => ({
@@ -30,13 +33,25 @@ export default function Editor() {
     }
   };
 
+  const handleClickDelete = async () => {
+    const response = await deleteNote(userState, editorState);
+
+    // console.log(response);
+    if (response) {
+      alert("Note deleted.");
+      setOpenMenu(false);
+      window.location.reload();
+      dispatch(clearEditor());
+    }
+  };
+
   useEffect(() => {
     setNote((prev: Note) => ({
       ...prev,
-      date: editorReducer.date,
-      details: editorReducer.details,
+      date: editorState.date,
+      details: editorState.details,
     }));
-  }, [editorReducer]);
+  }, [editorState]);
 
   return (
     <main className="editor-root position-relative container-fluid full-height">
@@ -47,7 +62,12 @@ export default function Editor() {
       >
         <i className="bi bi-three-dots text-warning fs-5"></i>
       </button>
-      {openMenu && <EditorMenu handleClickSave={handleClickSave} />}
+      {openMenu && (
+        <EditorMenu
+          handleClickSave={handleClickSave}
+          handleClickDelete={handleClickDelete}
+        />
+      )}
 
       {note && (
         <textarea

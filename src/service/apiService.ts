@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASEURL, GET_CONFIG, POST_CONFIG } from "../utils/api";
 import { User } from "../types/user";
-import { Note } from "../types/notes";
+import { Note, NoteNode } from "../types/notes";
 
 export const fetchUsers = async () => {
   try {
@@ -81,6 +81,27 @@ export const addNoteToNotesTable = async (note: Note, user: User) => {
       return response.status === 200;
     } catch (e) {
       console.log("addNoteToNotesTable error");
+      console.error(e);
+    }
+  }
+};
+
+export const deleteNote = async (currentUser: User, currentNote: NoteNode) => {
+  // return { currentUser, currentNote };
+  const notes = await fetchNotes();
+
+  if (notes && currentUser && currentNote) {
+    delete notes[currentUser.email][currentNote.date.toString()];
+
+    try {
+      const response = await axios.put(
+        BASEURL + process.env.REACT_APP_NOTES_BIN_ID,
+        notes,
+        POST_CONFIG
+      );
+      return response.status === 200;
+    } catch (e) {
+      console.log("deleteNote error");
       console.error(e);
     }
   }
