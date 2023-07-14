@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { clearEditor } from "../actions";
 import { useUserNotes } from "../hooks/useUserNotes";
 import { addNoteToNotesTable, deleteNote } from "../service/apiService";
+import { Note } from "../types/notes";
 import { RootState } from "../types/store";
 import EditorMenu from "./EditorMenu";
-import { Note } from "../types/notes";
-import { User } from "../types/user";
-import { clearEditor } from "../actions";
 
 export default function Editor() {
   const [note, setNote] = useState<Note>("");
@@ -27,21 +26,22 @@ export default function Editor() {
   const handleClickSave = async () => {
     const response = await addNoteToNotesTable(note, userState);
     if (response && userNotes) {
-      alert("Note saved.");
       setOpenMenu(false);
       window.location.reload();
+
+      return response;
     }
   };
 
   const handleClickDelete = async () => {
     const response = await deleteNote(userState, editorState);
 
-    // console.log(response);
     if (response) {
-      alert("Note deleted.");
       setOpenMenu(false);
       window.location.reload();
       dispatch(clearEditor());
+
+      return response;
     }
   };
 
