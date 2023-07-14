@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NotesEditor from "../components/NotesEditor";
 import Searchbar from "../components/Searchbar";
