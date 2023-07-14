@@ -106,3 +106,27 @@ export const deleteNote = async (currentUser: User, currentNote: NoteNode) => {
     }
   }
 };
+
+export const editNote = async (
+  currentUser: User,
+  currentNote: NoteNode,
+  newNote: NoteNode
+) => {
+  const notes = await fetchNotes();
+
+  if (notes && currentUser && currentNote) {
+    notes[currentUser.email][currentNote.date.toString()] = newNote.details;
+
+    try {
+      const response = await axios.put(
+        BASEURL + process.env.REACT_APP_NOTES_BIN_ID,
+        notes,
+        POST_CONFIG
+      );
+      return response.status === 200;
+    } catch (e) {
+      console.log("editNote error");
+      console.error(e);
+    }
+  }
+};

@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearEditor } from "../actions";
+import { clearEditor, selectNote } from "../actions";
 import { useUserNotes } from "../hooks/useUserNotes";
-import { addNoteToNotesTable, deleteNote } from "../service/apiService";
-import { Note } from "../types/notes";
+import {
+  addNoteToNotesTable,
+  deleteNote,
+  editNote,
+} from "../service/apiService";
+import { Note, NoteNode } from "../types/notes";
 import { RootState } from "../types/store";
 import EditorMenu from "./EditorMenu";
 
@@ -45,6 +49,18 @@ export default function Editor() {
     }
   };
 
+  const handleClickEdit = async () => {
+    const response = await editNote(userState, editorState, note as NoteNode);
+
+    if (response) {
+      setOpenMenu(false);
+      window.location.reload();
+      dispatch(selectNote(note));
+
+      return response;
+    }
+  };
+
   useEffect(() => {
     setNote((prev: Note) => ({
       ...prev,
@@ -64,6 +80,7 @@ export default function Editor() {
       </button>
       {openMenu && (
         <EditorMenu
+          handleClickEdit={handleClickEdit}
           handleClickSave={handleClickSave}
           handleClickDelete={handleClickDelete}
         />
