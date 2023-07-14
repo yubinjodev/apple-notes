@@ -61,6 +61,16 @@ export default function Editor() {
     }
   };
 
+  const handleClickNewNote = () => {
+    dispatch(clearEditor());
+
+    setNote((prev: Note) => ({
+      ...prev,
+      date: new Date(),
+      details: "",
+    }));
+  };
+
   useEffect(() => {
     setNote((prev: Note) => ({
       ...prev,
@@ -78,6 +88,15 @@ export default function Editor() {
       >
         <i className="bi bi-three-dots text-warning fs-5"></i>
       </button>
+
+      <button
+        className="editor-menu rounded-circle d-flex align-items-center justify-content-center position-absolute end-0 bg-transparent"
+        style={{ height: 24, width: 24, border: "none", bottom: 24 }}
+        onClick={handleClickNewNote}
+      >
+        <i className="bi bi-pencil-square text-warning fs-5"></i>
+      </button>
+
       {openMenu && (
         <EditorMenu
           handleClickEdit={handleClickEdit}
