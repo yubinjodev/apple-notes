@@ -18,7 +18,7 @@ export default function Banner() {
   return (
     <div
       className="banner-root bg-transparent position-fixed d-flex justify-content-end px-3"
-      style={{ width: "100%" }}
+      style={{ width: "100%", zIndex: 999 }}
     >
       <i
         className="bi bi-person-circle fs-4"

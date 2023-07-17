@@ -80,7 +80,7 @@ export default function Editor() {
   }, [editorState]);
 
   return (
-    <main className="editor-root position-relative container-fluid full-height">
+    <div className="editor-root position-relative container-fluid full-height">
       <button
         className="editor-menu border border-warning rounded-circle d-flex align-items-center justify-content-center position-absolute top-0 end-0 bg-transparent"
         style={{ height: 24, width: 24 }}
@@ -112,6 +112,6 @@ export default function Editor() {
           onChange={handleChangeInput}
         />
       )}
-    </main>
+    </div>
   );
 }
