@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import "./styles/__mobile.scss";
 import "./styles/__custom.scss";
 
 import Window from "./pages/Window";

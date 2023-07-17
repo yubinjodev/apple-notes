@@ -12,7 +12,7 @@ export default function BannerMenu(props: BannerMenuProps) {
   return (
     <div
       className="bannermenu-root container bg-transparent p-2 rounded position-absolute  end-0 my-4"
-      style={{ width: 240, top: "10px" }}
+      style={{ width: 240, top: "10px", zIndex: 1 }}
     >
       <div className=" container d-flex flex-row justify-content-between align-items-center">
         <div>{userState?.email}</div>

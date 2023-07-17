@@ -1,4 +1,4 @@
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "bootstrap";
 
 :root {
   --bs-body-color: #fff;
@@ -103,3 +103,12 @@ p{
   ::-webkit-scrollbar-thumb:hover {
     background: red;
   } 
+
+
+  @include media-breakpoint-down(xl) {
+    .window-root{
+        height:95vh;
+        bottom:0;
+        position: fixed !important;
+    }
+}
