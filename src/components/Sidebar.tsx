@@ -69,6 +69,28 @@ export default function Sidebar() {
           }
           return null;
         })}
+
+      {parsedNotes.length < 1 && (
+        <div className="placeholder-glow">
+          <div>
+            <h1 className="placeholder col-6 placeholder-lg"></h1>
+            <p className="placeholder col-12 placeholder-lg"></p>
+            <hr />
+          </div>
+
+          <div>
+            <h1 className="placeholder col-6 placeholder-lg"></h1>
+            <p className="placeholder col-12 placeholder-lg"></p>
+            <hr />
+          </div>
+
+          <div>
+            <h1 className="placeholder col-6 placeholder-lg"></h1>
+            <p className="placeholder col-12 placeholder-lg"></p>
+            <hr />
+          </div>
+        </div>
+      )}
     </aside>
   );
 }

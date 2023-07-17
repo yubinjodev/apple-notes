@@ -12,5 +12,6 @@ export const GET_CONFIG = {
   headers: {
     "X-Master-Key": process.env.REACT_APP_X_MASTER_KEY,
     "X-Access-Key": process.env.REACT_APP_X_ACCESS_KEY,
+    "Access-Control-Allow-Origin": "*",
   },
 };
