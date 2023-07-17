@@ -6,6 +6,7 @@ import { Note, NoteNode } from "../types/notes";
 import { Action, RootState } from "../types/store";
 import SidebarPreview from "./SidebarPreview";
 import { useIsMobile } from "../hooks/useIsMobile";
+import { useSidebar } from "../hooks/useSidebar";
 
 type SidebarProps = {
   closeSidebar?: () => void;
@@ -13,47 +14,9 @@ type SidebarProps = {
 
 export default function Sidebar(props: SidebarProps) {
   const { closeSidebar } = props;
-  const { userNotes } = useUserNotes();
-  const dispatch = useDispatch();
-  const [parsedNotes, setParsedNotes] = useState<Note[]>([]);
   const { isMobile } = useIsMobile();
   const userState = useSelector((state: RootState) => state.userReducer);
-
-  useEffect(() => {
-    const notesParser = (notesState: Action) => {
-      if (parsedNotes) {
-        for (const date in notesState.payload) {
-          const exists = parsedNotes.some(
-            (note) => (note as NoteNode)?.date?.toString() === date
-          );
-          if (!exists) {
-            setParsedNotes((prev: Note[]) => [
-              ...prev,
-              {
-                date: new Date(date),
-                details: notesState.payload[date],
-              },
-            ]);
-          }
-        }
-      } else {
-        const newParsedNotes = Object.entries(notesState.payload).map(
-          ([date, details]) => ({
-            date: new Date(date),
-            details: details as string,
-          })
-        );
-        setParsedNotes(newParsedNotes);
-      }
-    };
-
-    if (userNotes) {
-      const notesState = dispatch(importNotes(userNotes));
-      if (notesState) {
-        notesParser(notesState);
-      }
-    }
-  }, [userNotes, dispatch, parsedNotes]);
+  const { parsedNotes } = useSidebar();
 
   return (
     <aside
