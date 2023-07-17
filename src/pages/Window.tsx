@@ -66,7 +66,11 @@ export default function Window() {
                 )}
               </button>
             )}
-            {openSidebar ? <Sidebar /> : <NotesEditor />}
+            {openSidebar ? (
+              <Sidebar closeSidebar={() => setOpenSidebar(false)} />
+            ) : (
+              <NotesEditor />
+            )}
           </div>
         )}
       </div>

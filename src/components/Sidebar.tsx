@@ -7,7 +7,12 @@ import { Action } from "../types/store";
 import SidebarPreview from "./SidebarPreview";
 import { useIsMobile } from "../hooks/useIsMobile";
 
-export default function Sidebar() {
+type SidebarProps = {
+  closeSidebar?: () => void;
+};
+
+export default function Sidebar(props: SidebarProps) {
+  const { closeSidebar } = props;
   const { userNotes } = useUserNotes();
   const dispatch = useDispatch();
   const [parsedNotes, setParsedNotes] = useState<Note[]>([]);
@@ -61,6 +66,7 @@ export default function Sidebar() {
           if (note && note.date && note.details) {
             return (
               <SidebarPreview
+                closeSidebar={closeSidebar}
                 key={note.date + note.details}
                 date={note.date}
                 details={note.details}

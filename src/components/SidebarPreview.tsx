@@ -4,14 +4,18 @@ import { selectNote } from "../actions";
 type SidebarPreviewProps = {
   date: Date;
   details: string;
+  closeSidebar?: () => void;
 };
 
 export default function SidebarPreview(props: SidebarPreviewProps) {
-  const { date, details } = props;
+  const { date, details, closeSidebar } = props;
   const dispatch = useDispatch();
 
   const handleClickPreview = () => {
     dispatch(selectNote({ date, details }));
+    if (closeSidebar) {
+      closeSidebar();
+    }
   };
 
   return (
