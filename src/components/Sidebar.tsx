@@ -5,11 +5,13 @@ import { useUserNotes } from "../hooks/useUserNotes";
 import { Note, NoteNode } from "../types/notes";
 import { Action } from "../types/store";
 import SidebarPreview from "./SidebarPreview";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 export default function Sidebar() {
   const { userNotes } = useUserNotes();
   const dispatch = useDispatch();
   const [parsedNotes, setParsedNotes] = useState<Note[]>([]);
+  const { isMobile } = useIsMobile();
 
   useEffect(() => {
     const notesParser = (notesState: Action) => {
@@ -48,7 +50,12 @@ export default function Sidebar() {
   }, [userNotes, dispatch, parsedNotes]);
 
   return (
-    <aside className="sidebar-root">
+    <aside
+      className="sidebar-root"
+      style={{
+        marginTop: `${isMobile ? "24px" : 0}`,
+      }}
+    >
       {parsedNotes &&
         parsedNotes.map((note) => {
           if (note && note.date && note.details) {
