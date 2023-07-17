@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { importNotes } from "../actions";
 import { useUserNotes } from "../hooks/useUserNotes";
 import { Note, NoteNode } from "../types/notes";
-import { Action } from "../types/store";
+import { Action, RootState } from "../types/store";
 import SidebarPreview from "./SidebarPreview";
 import { useIsMobile } from "../hooks/useIsMobile";
 
@@ -17,6 +17,7 @@ export default function Sidebar(props: SidebarProps) {
   const dispatch = useDispatch();
   const [parsedNotes, setParsedNotes] = useState<Note[]>([]);
   const { isMobile } = useIsMobile();
+  const userState = useSelector((state: RootState) => state.userReducer);
 
   useEffect(() => {
     const notesParser = (notesState: Action) => {
@@ -76,7 +77,7 @@ export default function Sidebar(props: SidebarProps) {
           return null;
         })}
 
-      {parsedNotes.length < 1 && (
+      {userState && parsedNotes.length < 1 && (
         <div className="placeholder-glow">
           <div>
             <h1 className="placeholder col-6 placeholder-lg"></h1>
