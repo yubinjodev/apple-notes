@@ -7,7 +7,7 @@ import { DBNote, DBNotes } from "../types/notes";
 export const useUserNotes = () => {
   const [userNotes, setUserNotes] = useState<DBNote>(null);
   const userState = useSelector((state: RootState) => state.userReducer);
-
+  // save
   useEffect(() => {
     const filterNotes = (notesData: DBNotes) => {
       const currentUserEmail = userState.email;
