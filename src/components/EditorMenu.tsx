@@ -22,7 +22,6 @@ export default function EditorMenu(props: EditorMenuProps) {
 
     if (editorState) {
       try {
-        console.log("edit note save");
         await handleClickEdit();
       } catch (e) {
         console.error(e);
@@ -32,7 +31,6 @@ export default function EditorMenu(props: EditorMenuProps) {
       }
     } else {
       try {
-        console.log(" note save");
         await handleClickSave();
       } catch (e) {
         console.error(e);
