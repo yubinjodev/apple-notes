@@ -1,23 +1,42 @@
-import { Notes } from "../types/notes";
+import { useDispatch } from "react-redux";
+import { selectNote } from "../actions";
 
 type SidebarPreviewProps = {
   date: Date;
   details: string;
+  closeSidebar?: () => void;
 };
 
 export default function SidebarPreview(props: SidebarPreviewProps) {
-  const { date, details } = props;
+  const { date, details, closeSidebar } = props;
+  const dispatch = useDispatch();
+
+  const handleClickPreview = () => {
+    dispatch(selectNote({ date, details }));
+    if (closeSidebar) {
+      closeSidebar();
+    }
+  };
 
   return (
-    <section className="sidebarpreview-root container">
+    <section
+      className="sidebarpreview-root container"
+      style={{ cursor: "pointer" }}
+      onClick={handleClickPreview}
+    >
       <div className="row fs-5">
-        <div className="col">{details}</div>
+        <div className="col text-truncate">{details}</div>
       </div>
-
       <div className="row fs-6">
         <div className="col pe-0 text-warning">Public</div>
         <div className="col px-0 text-center">&#183;</div>
-        <div className="col ps-0 text-muted">{date?.toString()}</div>
+        <div className="col ps-0 text-muted">
+          {new Date(date).toLocaleDateString("en-us", {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+          })}
+        </div>
       </div>
       <hr />
     </section>

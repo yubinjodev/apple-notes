@@ -1,130 +1,29 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-
-import { useDispatch } from "react-redux";
-import { login } from "../actions";
-
+import React from "react";
+import { useSignUpForm } from "../hooks/useSignUpForm";
 import { SignUpFormProps } from "../types/user";
-import { BASEURL, GET_CONFIG, POST_CONFIG } from "../utils/api";
 
 export default function SignUpForm(props: SignUpFormProps) {
-  const dispatch = useDispatch();
-
-  const { openSignInForm } = props;
-
-  const [email, setEmail] = useState<string>("");
-  const [pw, setPw] = useState<string>("");
-  const [users, setUsers] = useState<any>(null);
-  const [error, setError] = useState<string>("");
-
-  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handleChangePw = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPw(e.target.value);
-  };
-
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get(
-        BASEURL + process.env.REACT_APP_USER_BIN_ID,
-        GET_CONFIG
-      );
-      const userData = await response.data.record;
-
-      if (userData) {
-        setUsers(userData);
-
-        infoValidation(userData);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const addUser = async () => {
-    await setUsers((prev: any) => ({
-      ...prev,
-      [email]: pw,
-    }));
-  };
-
-  const signUp = () => {
-    fetchUsers();
-  };
-
-  const infoValidation = (userData: object) => {
-    console.log(userData);
-
-    const emailChecker = () => {
-      let flag = 0;
-      for (const emailData in userData) {
-        if (emailData === email) {
-          flag = 1;
-        }
-      }
-
-      return flag;
-    };
-
-    const flag = emailChecker();
-
-    for (const emailData in userData) {
-      if (emailData === email) {
-        setError("An account with that email already exists.");
-      }
-      if (pw.length <= 4 && !flag) {
-        setError("none");
-      }
-    }
-
-    if (pw.length < 4) {
-      setError("Your password should be at least 4 characters long.");
-    }
-  };
-
-  const handleClickSignUp = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (email && pw) {
-      signUp();
-    }
-  };
-
-  useEffect(() => {
-    if (error === "none") {
-      addUser();
-    }
-  }, [error]);
-
-  useEffect(() => {
-    console.log(users);
-
-    if (error === "none" && users) {
-      try {
-        axios.put(
-          BASEURL + process.env.REACT_APP_USER_BIN_ID,
-          users,
-          POST_CONFIG
-        );
-        alert("Sign Up Successful.");
-        dispatch(login({ email, pw }));
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  }, [users]);
+  const {
+    email,
+    pw,
+    error,
+    loading,
+    handleChangeEmail,
+    handleChangePw,
+    handleClickSignUp,
+    openSignInForm,
+  } = useSignUpForm(props);
 
   return (
     <>
       <h1 className="display-3 text-center mb-5">Apple Notes</h1>
+
       <form
         className="loginform-root container-sm form-container"
         onSubmit={handleClickSignUp}
       >
         <div className="row">
-          <p className="text-danger text-center">{error !== "none" && error}</p>
+          <p className="text-danger text-center">{error}</p>
           <input
             value={email}
             className="form-control"
@@ -146,7 +45,16 @@ export default function SignUpForm(props: SignUpFormProps) {
 
         <div className="row mb-3">
           <button className="btn bg-transparent" type="submit">
-            Sign Up
+            {!loading ? (
+              "Sign Up"
+            ) : (
+              <div
+                className="spinner-border spinner-border-sm text-light"
+                role="status"
+              >
+                <span className="sr-only"></span>
+              </div>
+            )}
           </button>
         </div>
 

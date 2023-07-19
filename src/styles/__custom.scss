@@ -1,4 +1,4 @@
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "bootstrap";
 
 :root {
   --bs-body-color: #fff;
@@ -76,6 +76,9 @@ textarea.form-control::placeholder{
     color: $light !important;
 }
 
+p{
+  margin-bottom:none;
+}
 
 .full-height{
     height:100%;
@@ -100,3 +103,12 @@ textarea.form-control::placeholder{
   ::-webkit-scrollbar-thumb:hover {
     background: red;
   } 
+
+
+  @include media-breakpoint-down(xl) {
+    .window-root{
+        height:95vh;
+        bottom:0;
+        position: fixed !important;
+    }
+}

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-import { LoginFormProps } from "../types/user";
+import { DBUser, LoginFormProps } from "../types/user";
 
 import { useDispatch } from "react-redux";
 
@@ -15,7 +15,7 @@ export default function LoginForm(props: LoginFormProps) {
 
   const [email, setEmail] = useState<string>("");
   const [pw, setPw] = useState<string>("");
-  const [users, setUsers] = useState<any>([]);
+  const [users, setUsers] = useState<DBUser[]>([]);
   const [error, setError] = useState<string>("");
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +39,7 @@ export default function LoginForm(props: LoginFormProps) {
         users.push({ [id]: userData[id] });
       }
 
-      users.forEach((user: any) => {
+      users.forEach((user) => {
         const id = Object.keys(user).toString();
         const dbPw = Object.values(user).toString();
         if (id === email && dbPw === pw) {
