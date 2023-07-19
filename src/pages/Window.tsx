@@ -1,10 +1,9 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import NotesEditor from "../components/NotesEditor";
-import Searchbar from "../components/Searchbar";
 import Sidebar from "../components/Sidebar";
 import WindowControl from "../components/WindowControl";
 import { useIsMobile } from "../hooks/useIsMobile";
-import { useSelector } from "react-redux";
 import { RootState } from "../types/store";
 
 export default function Window() {
