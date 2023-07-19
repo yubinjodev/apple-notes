@@ -18,9 +18,7 @@ export default function Window() {
         <div className="col-6 col-lg-9  d-flex align-items-center">
           <WindowControl />
         </div>
-        <div className="col-6 col-lg-3">
-          <Searchbar />
-        </div>
+        <div className="col-6 col-lg-3">{/* <Searchbar /> */}</div>
       </div>
 
       <div className="row full-height" style={{ height: "93%" }}>
