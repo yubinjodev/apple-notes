@@ -1,12 +1,8 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { importNotes } from "../actions";
-import { useUserNotes } from "../hooks/useUserNotes";
-import { Note, NoteNode } from "../types/notes";
-import { Action, RootState } from "../types/store";
-import SidebarPreview from "./SidebarPreview";
+import { useSelector } from "react-redux";
 import { useIsMobile } from "../hooks/useIsMobile";
 import { useSidebar } from "../hooks/useSidebar";
+import { RootState } from "../types/store";
+import SidebarPreview from "./SidebarPreview";
 
 type SidebarProps = {
   closeSidebar?: () => void;
@@ -43,19 +39,19 @@ export default function Sidebar(props: SidebarProps) {
       {userState && parsedNotes.length < 1 && (
         <div className="placeholder-glow">
           <div>
-            <h1 className="placeholder col-6 placeholder-lg"></h1>
+            <h1 className="placeholder col-6 placeholder-lg">{}</h1>
             <p className="placeholder col-12 placeholder-lg"></p>
             <hr />
           </div>
 
           <div>
-            <h1 className="placeholder col-6 placeholder-lg"></h1>
+            <h1 className="placeholder col-6 placeholder-lg">{}</h1>
             <p className="placeholder col-12 placeholder-lg"></p>
             <hr />
           </div>
 
           <div>
-            <h1 className="placeholder col-6 placeholder-lg"></h1>
+            <h1 className="placeholder col-6 placeholder-lg">{}</h1>
             <p className="placeholder col-12 placeholder-lg"></p>
             <hr />
           </div>
