@@ -13,9 +13,9 @@ export default function App() {
   return (
     <>
       {userState && <Banner />}
-      <div className="bg-body d-flex justify-content-center align-items-center">
+      <main className="bg-body d-flex justify-content-center align-items-center">
         <Window />
-      </div>
+      </main>
     </>
   );
 }

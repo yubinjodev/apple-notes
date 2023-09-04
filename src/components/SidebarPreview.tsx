@@ -25,7 +25,9 @@ export default function SidebarPreview(props: SidebarPreviewProps) {
       onClick={handleClickPreview}
     >
       <div className="row fs-5">
-        <div className="col text-truncate">{details}</div>
+        <h1 className="col text-truncate" style={{ fontSize: "1rem" }}>
+          {details}
+        </h1>
       </div>
       <div className="row fs-6">
         <div className="col pe-0 text-warning">Public</div>

@@ -12,7 +12,7 @@ export default function Window() {
   const { isMobile } = useIsMobile();
 
   return (
-    <div className="window-root container-sm bg-transparent rounded-3 shadow overflow-hidden position-relative">
+    <article className="window-root container-sm bg-transparent rounded-3 shadow overflow-hidden position-relative">
       <div className="row bg-transparent-darker p-2 rounded-top position-sticky top-0 z-1">
         <div className="col-6 col-lg-9  d-flex align-items-center">
           <WindowControl />
@@ -20,15 +20,15 @@ export default function Window() {
         <div className="col-6 col-lg-3">{/* <Searchbar /> */}</div>
       </div>
 
-      <div className="row full-height" style={{ height: "93%" }}>
+      <article className="row full-height" style={{ height: "93%" }}>
         {!isMobile && (
           <>
             <div className="col-6 col-lg-2 py-3">
               <Sidebar />
             </div>
-            <div className="col-6 col-lg-10 bg-transparent-dark rounded-end d-flex justify-content-center align-items-center">
+            <section className="col-6 col-lg-10 bg-transparent-dark rounded-end d-flex justify-content-center align-items-center">
               <NotesEditor />
-            </div>
+            </section>
           </>
         )}
 
@@ -70,7 +70,7 @@ export default function Window() {
             )}
           </div>
         )}
-      </div>
-    </div>
+      </article>
+    </article>
   );
 }
